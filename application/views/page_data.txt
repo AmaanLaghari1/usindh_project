@@ -1,0 +1,851 @@
+
+                                                                
+                                <section id="about" class="">
+      <div class="container">
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="letter-space-4 text-gray-darkgray text-uppercase mt-0 mb-0"><br></h6>
+              <h2 class="text-uppercase font-weight-600 mt-0 font-28 line-bottom">Welcome to University of Sindh JAMSHORO</h2>
+              <h4 class="text-theme-colored">The University of Sindh, the oldest University of the country!</h4>
+              <p>The University of Sindh, the oldest University of the country, was constituted under the University of Sindh Act. No. XVII of 1947 passed by the Legislative Assembly of Sindh. The Act was subsequently revised and modified in 1961 and later. The Act of 1972 under which the University is presently functioning provided for greater autonomy and representation of teachers.</p>
+              <a class="btn btn-theme-colored btn-flat btn-lg mt-10 mb-sm-30" href="<?=base_url()?>page/59">Know More →</a>
+            </div>
+            <div class=" col-md-6" =""="">
+              <div class="video-popup"> <img alt="" src="images/about/5.jpg" class="img-responsive img-fullwidth">
+              </div>
+                       </div>
+            
+                                    </div>
+                    </div>
+                     </div></section> <!---END-SECTION--->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                         
+                                
+ 
+<div id="about" class="container">
+    <div class="section-content">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/29" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_CAREER_OPPORTUNITIES_01-01_1685085256_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/29">Career Opportunities</a></h4>
+            <p class="">Recruitments in University of Sindh and it's Campuses</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/110" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_QUALITY_ENHANCEMENT_CELL_01_1685085522_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/110">Annual College Portal</a></h4>
+            <p class="">University of Sindh Affiliated College Student Portal (Annual & Semester)</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="https://oric.usindh.edu.pk/research/" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_(ORIC)_01_1685085126_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="https://oric.usindh.edu.pk/research/">(ORIC)</a></h4>
+            <p class="">University of Sindh Projects, Researchers, Publications</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/32" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_HARASSMENT_OF_WOMEN_01_1685085455_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/32">Anti Harassment Cell</a></h4>
+            <p class="">If it's unwanted, it's harassment</p>
+          </div>
+        </div>
+        </div>
+    </div>
+</div>      
+<div id="about" class="container">
+    <div class="section-content">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/31" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_BUREAU_OF_STAGS_01_1685085358_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/31">Bureau of STAGS</a></h4>
+            <p class="">Bureau of Students’ Tutorial, Guidance/Counseling Services & Co-Curricular Activities (STAGS)</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/38" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_STUDENT_FINANCIAL_AID_OFFICE_01_1685085574_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="https://usindh.edu.pk/dept/sfao">Student Financial Aid Office</a></h4>
+            <p class="">Scholarships/Financial Aid Cases</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/51" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_TENDERS_01_1685085586_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/51">Tenders</a></h4>
+            <p class="">Inviting and evaluating bids from suppliers</p>
+          </div>
+        </div>
+        <div class="section-content">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="#" class="">
+                <img src="<?=base_url()?>../resource/upload_images/1_download_01_1685085401_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/82">Downloads</a></h4>
+            <p class="">Forms for Teachers, Staff and Students</p>
+            </div>
+        </div>
+        </div>  
+        </div>
+    </div>
+    <div id="about" class="container">
+    <div class="section-content">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/115" class="">
+                <img src="<?=base_url()?>resource/upload_images/3_lecture_1700636161_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="https://usindh.edu.pk/dept/qec">Quality Enhancement Cell</a></h4>
+            <p class="">The QEC of the University has been established on 21st November 2006</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/20" class="">
+                <img src="<?=base_url()?>resource/upload_images/3_library_1700636243_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/20">Central Library</a></h4>
+            <p class="">The present Allama I. I. Kazi Central Library became functional in 1975</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="https://usindh.edu.pk/dept/asces/" class="">
+                <img src="<?=base_url()?>resource/upload_images/3_graduates_1700636303_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="https://usindh.edu.pk/dept/asces">(FESEA)</a></h4>
+            <p class="">Area Study Centre, Far East and Southeast Asia</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+            <a href="<?=base_url()?>page/101" class="">
+                <img src="<?=base_url()?>resource/upload_images/3_desktop_1700636267_.png" width="90" alt="">
+            </a>
+            <h4 class="icon-box-title text-uppercase"><a class="" href="<?=base_url()?>page/101">Institute of Sindhology</a></h4>
+            <p class="">Sindhi Academy</p>
+          </div>
+        </div>
+        </div>
+    </div>
+</div> 
+   </div>                                                        </div>
+                        
+
+                            <!---END-SECTION--->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <section data-bg-img="images/pattern/p6.png" style="background-image: url(" images="" pattern="" p6.png");"="">
+      <div class="container">
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="video-popup">                
+                <a href="https://www.youtube.com/watch?v=pW1uVUg5wXM" data-lightbox-gallery="youtube-video" title="Video">
+                  <img alt="" src="<?=base_url()?>images/about/Dr.sKalhoro.jpg" class="thumb">
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h6 class="letter-space-4 text-gray-darkgray text-uppercase mt-sm-30 mt-0 mb-0"><br></h6>
+              <h2 class="text-uppercase font-weight-600 mt-0 font-28 line-bottom">The Vice-Chancellor Message</h2>
+              <h4 class="text-theme-colored">Dear Students,</h4>
+              <p> <i class="fa fa-angle-double-right text-theme-color-2 font-15"></i> It gives me immense pleasure to welcome the fresh batch of students who are exuberant and eager to join University of Sindh, Jamshoro. I know that your shining faces and young minds are ready to start an exciting journey of academic excellence and personal growth at one of Sindh’s premier institutions of Higher Education. I hope and pray that this new phase of life will turn out to be rewarding and satisfying for you and for your parents. This University is fully capable of turning your dreams into reality with the cutting edge curricula and highly qualified and trained teachers.
+
+The university is known for producing high quality graduates and for its service to the nation. It has become a place of excellence in Pakistan in higher education and scientific research. These are the results of sustained efforts the university has made over the years towards faculty development, and creativity and innovation.</p>
+              <a class="btn btn-theme-colored btn-flat btn-lg mt-10 mb-sm-30" href="<?=base_url()?>page/14">Know More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!---END-SECTION--->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+
+<section id="courses" class="bg-lighter">
+    <div class="container pb-40">
+      <div class="section-title mb-0">
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="text-uppercase font-28 line-bottom mt-0 line-height-1">Admissions 2024</h2>
+          <h4 class="pb-20"><br></h4>
+       </div>
+      </div>
+      </div>
+        <div class="section-content">
+            <div class="row">
+        
+                <div class="col-md-12">
+                    <div class="owl-carousel-4col" data-dots="true">
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-02.png" class="img-fullwidth">
+                                    
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://admission.usindh.edu.pk/admission/">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-04.png" class="img-fullwidth">
+                                   
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://drgs.usindh.edu.pk/drgs_s/public/">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-03.png" class="img-fullwidth">
+                                 
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://admission.usindh.edu.pk/admission/assets/Prospectus_2023_(13-01-2023).pdf">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-01.png" class="img-fullwidth">
+                                    
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://admission.usindh.edu.pk/admission/">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</section>
+
+
+                                
+                                
+
+<section id="courses" class="bg-lighter">
+    <div class="container pb-40">
+      <div class="section-title mb-0">
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="text-uppercase font-28 line-bottom mt-0 line-height-1">Announcements<br>
+          </h2>
+       </div>
+      </div>
+      </div>
+        <div class="section-content">
+        
+            <div class="row">        
+                <div class="col-md-12">
+                    <div class="owl-carousel-4col" data-dots="true">
+                     <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>resource/upload_images/3_bg11_1725868950_.jpg" class="img-fullwidth">
+                                    
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://convocation.usindh.edu.pk/">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                  
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-08.png" class="img-fullwidth">
+                                    
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://exam.usindh.edu.pk/v2/marksheet.php">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-05.png" class="img-fullwidth">
+                                   
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://exam.usindh.edu.pk/v2/trancript.php">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-07.png" class="img-fullwidth">
+                                    
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://itsc.usindh.edu.pk/eportal/public/login.php">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <div class="service-block bg-white">
+                                <div class="thumb"> <img alt="featured project" src="<?=base_url()?>../resource/upload_images/background-06.png" class="img-fullwidth">
+                                  
+                                </div>
+                                <div class="content text-left flip p-25 pt-0">
+                                    
+                                    <a class="btn btn-dark btn-theme-colored btn-sm text-uppercase mt-10" href="https://sutc.usindh.edu.pk/sutc/">view details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</section>
+
+                                                                                                                                                                                                                                                                                        <!---END-SECTION--->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+
+                                
+                                
+                                
+
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+    <!-- Divider: testimonials -->
+    <section class="divider parallax layer-overlay overlay-theme-colored-9" data-background-ratio="0.5" data-bg-img="<?=base_url()?>images/bg/bg2.jpg">
+        <div class="container pb-50">
+            <div class="section-title">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="font-weight-300 m-0 text-gray-lightgray">University of Sindh</h5>
+                        <h2 class="mt-0 mb-0 text-uppercase line-bottom text-white font-28">Officials<span class="font-30 text-theme-color-2">.</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-10">
+                    <div class="owl-carousel-2col boxed" data-dots="true">                    
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>images/testimonials/dr.azhar.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">Sindh University Campus NaushehroFeroze</h4>
+                                     <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Azhar Ali Shah, Focal Person/Pro Vice Chancellor </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_khalil_1686294667_.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">Sindh University Laar Campus Badin</h4>
+                                     <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof Dr. Khalil-Ur-Rehman Khoumbati, Pro-Vice Chancellor </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_Khalida-faryal_1686293945_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Pharmacy</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Khalida Faryal Almani, Incharge Dean <br>
+
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_lachhman_1690872855_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Engineering and Technology</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Lachhman Das Dhomeja, Incharge Dean <br>
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_male-officer_1695103152_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Law</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Dean<br>
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_male-officer_1695103152_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Islamic Studies</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Hafiz Munir Ahmed Khan, Dean <br>
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_agha-asad-100_1699595966_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Natural Sciences</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Agha Asad Noor, Dean <br>
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_mkhan-sangi_1685607395_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Faculty of Arts</h4>
+                                   <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Muhammad Khan Sangi, Dean <br>
+                                   </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_jawed-achandio_1686291745_.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">Faculty of Commerce & Business Administration</h4>
+                                     <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Jawed Ahmed Chandio, Incharge Dean </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>../resource/upload_images/3_Hamadullah-Kakepoto_1686294278_.jpg">
+                                </div>
+                                <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">Faculty of Social Sciences</h4>
+                                     <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Hamadullah Kakepoto, Dean </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_male-officer_1695103152_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                    <h4 class="text-white mt-0">Faculty of Education</h4>
+                                     <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Abdul Sattar Almani, Dean </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_male-officer_1695103152_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Sindh University Main Campus</h4>
+                               <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Abdul Sattar Shah, Pro-Vice Chancellor </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/3_male-officer_1695103152_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">Sindh University Thatta Campus</h4>
+                                <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Pro-Vice Chancellor </a>
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="item">
+                            <div class="testimonial pt-10">
+                                <div class="thumb pull-left mb-0 mr-0 pr-20">
+                                    <img width="75" class="img-circle" alt="" src="<?=base_url()?>resource/upload_images/4_Nek-Shaikh_1693033272_.jpg">
+                                </div>
+                              <div class="ml-100 ">
+                                <h4 class="text-white mt-0">(MBBS) Campus Dadu</h4>
+                                <a class="btn btn-theme-color-2 text-white ml-15 mt-15">Prof. Dr. Nek M. Shaikh, Focal Person/Pro Vice Chancellor</a>
+                                 
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+                                         
+                                                                                                 <p> </p>
+                                                                                                                                                <!---END-SECTION--->
+                                
+                                
+    <!-- Section: Why Choose Us -->
+    #NEWS_SECTION                         <!---END-SECTION--->
+                                
+                                
+                                
+                                
+<section>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">    
+
+      <div class="heading-line-bottom">
+        <h2 class="mt-0 text-uppercase text-theme-colored title line-bottom line-height-1">Our<span class="text-theme-color-2 font-weight-400"> Gallery</span></h2>
+      </div>
+      <!-- Works Filter -->
+            <div class="portfolio-filter font-alt align-center">
+              <a href="#" class="active" data-filter="*">All</a>
+              <a href="#select1" class="" data-filter=".select1">Pre Entry Test 2024</a>
+              <a href="#select2" class="" data-filter=".select2">Conference</a>             
+            </div>
+            <!-- End Works Filter -->      
+
+      <!-- Portfolio Gallery Grid -->
+      <div class="gallery-isotope grid-4 gutter-small clearfix" data-lightbox="gallery">
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item">
+        
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>images/gallery/thumb_us4.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Central Library</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>images/gallery/us4.jpg" data-lightbox-gallery="gallery" title="Central Library"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>images/gallery/thumb_us7.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Institute of Plant Science</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="images/gallery/us7.jpg" data-lightbox-gallery="gallery" title="Institute of Plant Science"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item">
+          <div class="thumb">
+            <img class="img-fullwidth" src="images/gallery/thumb_us11.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Zero Point</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>images/gallery/us11.jpg" data-lightbox-gallery="gallery" title="Zero Point"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item">
+          <div class="thumb">
+            <img class="img-fullwidth" src="images/gallery/thumb_us8.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Institute of Mathematics & Computer Science</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>images/gallery/us8.jpg" data-lightbox-gallery="gallery" title="Institute of Mathametics & Computer Science"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>images/gallery/thumb_us1.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Media & Communication</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>images/gallery/us1.jpg" data-lightbox-gallery="gallery" title="Media & Communication"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item select1" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_p1_1698822890_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Pre-Entry Test 2024</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_p1_1698822548_.JPG" data-lightbox-gallery="gallery" title="Pre-Entry Test 2024"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+       <div class="gallery-item select1" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_p2_1698823294_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Pre-Entry Test 2024</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_p2_1698823260_.JPG" data-lightbox-gallery="gallery" title="Pre-Entry Test 2024"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+        <!-- Portfolio Item Start -->
+        <div class="gallery-item select1" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_p3_1698823551_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Pre-Entry Test 2024</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_p3_1698823466_.JPG" data-lightbox-gallery="gallery" title="Pre-Entry Test 2024"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+         <!-- Portfolio Item Start -->
+       <div class="gallery-item select1" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_p6_1698823908_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Pre-Entry Test 2024</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_p6_1698823822_.JPG" data-lightbox-gallery="gallery" title="Pre-Entry Test 2024"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+         <!-- Portfolio Item Start -->
+       <div class="gallery-item select2" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_c1_1705906871_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Int’l conference at SU</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_c-1_1705906925_.JPG" data-lightbox-gallery="gallery" title="Int’l conference at SU"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        <!-- Portfolio Item Start -->
+       <div class="gallery-item select2" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_c2_1705907137_.JPG" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Int’l conference at SU</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_c-2_1705907095_.JPG" data-lightbox-gallery="gallery" title="Int’l conference at SU"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        <!-- Portfolio Item Start -->
+       <div class="gallery-item select2" style="position: absolute; left: 0px; top: 0px;">
+          <div class="thumb">
+            <img class="img-fullwidth" src="<?=base_url()?>resource/upload_images/3_thumb_c3_1705907273_.jpg" alt="project">
+            <div class="overlay-shade"></div>
+            <div class="text-holder">
+              <div class="title text-center">Int’l conference at SU</div>
+            </div>
+            <div class="icons-holder">
+              <div class="icons-holder-inner">
+                <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
+                  <a href="<?=base_url()?>resource/upload_images/3_c-3_1705907186_.jpg" data-lightbox-gallery="gallery" title="Int’l conference at SU"><i class="fa fa-picture-o"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Portfolio Item End -->
+        
+ 
+
+     
+
+    </div>
+  </div>
+</div>
+</div></section>                                                                                                                
+                            

@@ -1,0 +1,18 @@
+assets/*
+user_guide/*
+system/*
+dash_assets/*
+verfication_log/*
+cmd_log/*
+application/libraries/*
+application/cache/*
+application/logs/*
+application/third_party/*
+.idea/*
+<<<<<<< Updated upstream
+*.xml
+=======
+.idea/workspace.xml
+.idea/workspace.xml
+>>>>>>> Stashed changes
+*.xml
