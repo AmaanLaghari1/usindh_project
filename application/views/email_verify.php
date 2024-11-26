@@ -7,16 +7,26 @@
 
 			<div style="padding: 5rem" class="col-3 p-2">
 
-				<h3>Enter the otp code sent to your email <?= $_SESSION['otp_code'] ?></h3>
+				<h3>Enter the otp code sent to your email <?= $_SESSION['otp_code']??'0' ?></h3>
+				<?php
+				if(isset($_SESSION['response'])){
+					?>
+					<div class="alert alert-<?= $_SESSION['response']['type'] ?>"><?= $_SESSION['response']['message'] ?></div>
+					<?php
+				}
+				?>
 
 				<form id="otp-verify-form" class="col-6" action="<?= site_url('email_verify_otp') ?>" method="post">
 					<div class="form-group">
 						<input type="text" class="form-control" name="otp_input" id="otp_input" placeholder="Enter OTP code" />
 					</div>
-					<div class="form-group">
+					<div class="form-group float-start">
 						<button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify</button>
+						<button type="button" id="send-otp-btn" class="btn btn-primary mx-1">Resend</button>
 					</div>
 				</form>
+
+				<div id="countdown"></div>
 
 			</div>
 		</div>
@@ -26,57 +36,41 @@
 <script>
 	$(document).ready(function(){
 
+<?php
+if (isset($_SESSION['otp_code']) && isset($_SESSION['otp_expiry'])) {
+    // Calculate remaining time in seconds
+    $timeLeft = $_SESSION['otp_expiry'] - time();
+    if ($timeLeft > 0) {
+?>
+        function otpTimer() {
+            let timeLeft = <?= $timeLeft ?>; // Remaining time in seconds
+            $("#send-otp-btn").prop("disabled", true); // Disable the resend button initially
+            const interval = setInterval(function () {
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    $("#countdown").text(''); // Clear countdown display
+                    $("#send-otp-btn").prop("disabled", false); // Enable the resend button
+                    return;
+                }
 
-		$("#otp-form").validate({
-			rules: {
-				roll_no: {
-					required: true,
-				},
-				email: {
-					required: true,
-				}
-			},
-			messages: {
-				roll_no: {
-					required: 'Roll No is required',
-				},
-				email: {
-					required: 'Email is required',
-				}
-			},
-			submitHandler: function(form) {
+                // Update time left (in minutes and seconds)
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                $("#countdown").text(`You can resend OTP in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
 
-				$.ajax({
-					url: 'email_request_send_otp',
-					type: 'POST',
-					data: {
-						email: form.email.value,
-						'<?= $this->security->get_csrf_token_name(); ?>': '<?= $this->security->get_csrf_hash(); ?>'
-					},
-					dataType: 'json',
-					success: function(response){
-						console.log(response);
-						let timeLeft = <?= $_SESSION['otp_expiry']??0 ?>;
-						$("#send-otp-btn").prop("disabled", true);
-						const interval = setInterval(function() {
-							if (timeLeft <= 0) {
-								clearInterval(interval);
-								$("#countdown").text(''); // Clear countdown display
-								$("#send-otp-btn").prop('disabled', false); // Enable the button
-								return;
-							}
+                timeLeft--; // Decrement time left
+            }, 1000);
+        }
 
-							// Update time left (in minutes and seconds)
-							let minutes = Math.floor(timeLeft / 60);
-							let seconds = timeLeft % 60;
-							$("#countdown").text(`You can resend OTP in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+        otpTimer();
+<?php
+    } else {
+        // OTP has already expired, enable the resend button immediately
+        echo '$("#send-otp-btn").prop("disabled", false);';
+    }
+}
+?>
 
-							timeLeft--; // Decrement time left
-						}, 1000);
-					}
-				})
-			}
-		})
 
 		$("#otp-verify-form").validate({
 			rules: {
@@ -94,6 +88,24 @@
 				}
 			}
 		})
+
+		$("#send-otp-btn").click(function() {
+			// Disable the resend button to prevent multiple clicks
+			$("#send-otp-btn").prop("disabled", true);
+
+			$.ajax({
+				url: 'resend_otp',
+				type: 'POST',
+				success: function(response) {
+					// Reload the page to reset the OTP timer
+					location.reload();
+				},
+				error: function(xhr, status, error) {
+					// console.log("Error: " + error);
+					$("#send-otp-btn").prop("disabled", false);
+				}
+			});
+		});
 
 
 	})

@@ -38,6 +38,20 @@
 					</div>
 
 					<div class="form-group my-2">
+						<label for="first_name">First Name<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First Name" value="<?= isset($old['first_name']) ? $old['first_name'] : '' ?>">
+					</div>
+					<div class="form-group my-2">
+						<label for="last_name">Last Name<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your Last Name" value="<?= isset($old['last_name']) ? $old['last_name'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2">
+						<label for="date_of_birth">Date of Birth<span class="text-danger">*</span></label>
+						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?= isset($old['date_of_birth']) ? $old['date_of_birth'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2">
 						<label for="cnic_no">CNIC No. (without dashes)<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="cnic_no" name="cnic_no" placeholder="Enter your CNIC" value="<?= isset($old['cnic_no']) ? $old['cnic_no'] : '' ?>">
 					</div>
@@ -48,8 +62,31 @@
 					</div>
 
 					<div class="form-group my-2">
-						<label for="email">Email Address<span class="text-danger">*</span></label>
+						<label for="email">Current Email Address<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="email" name="email" placeholder="Enter your Email Address" value="<?= isset($old['email']) ? $old['email'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2">
+						<label for="mobile_phone">Mobile Phone<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="mobile_phone" name="mobile_phone" placeholder="Enter your Mobile Phone Number" value="<?= isset($old['mobile_phone']) ? $old['mobile_phone'] : '' ?>">
+					</div>
+					<div class="form-group my-2">
+						<label for="whatsapp_no">Whatsapp No.<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="whatsapp_no" name="whatsapp_no" placeholder="Enter your Whatsapp Number" value="<?= isset($old['whatsapp_no']) ? $old['whatsapp_no'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2">
+						<label for="address">Postal Address<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="address" name="address" placeholder="Enter your Home Address" value="<?= isset($old['address']) ? $old['address'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2">
+						<label for="province">State/Province<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="province" name="province" placeholder="Enter your Province Name" value="<?= isset($old['province']) ? $old['province'] : '' ?>">
+					</div>
+					<div class="form-group my-2">
+						<label for="city">City<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="city" name="city" placeholder="Enter your City Name" value="<?= isset($old['city']) ? $old['city'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
@@ -66,7 +103,7 @@
 						</select>
 					</div>
 
-					<div class="form-group my-2">
+					<div class="form-group my-2 other">
 						<label for="department">Designation<span class="text-danger">*</span></label>
 						<select class="form-control" id="department" name="department">
 							<option value="">Select Designation</option>
@@ -80,14 +117,6 @@
 						</select>
 					</div>
 
-					<div class="form-group my-2">
-						<label for="first_name">First Name<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First Name" value="<?= isset($old['first_name']) ? $old['first_name'] : '' ?>">
-					</div>
-					<div class="form-group my-2">
-						<label for="last_name">Last Name<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your Last Name" value="<?= isset($old['last_name']) ? $old['last_name'] : '' ?>">
-					</div>
 <!--					<div class="form-group my-2 other">-->
 <!--						<label for="faculty_type">Faculty Type</label>-->
 <!--						<select class="form-control" id="faculty_type" name="faculty_type">-->
@@ -95,14 +124,10 @@
 <!--						</select>-->
 <!--					</div>-->
 					<div class="form-group my-2 std">
-						<label for="degree_program">MPhil/PHP<span class="text-danger">*</span></label>
+						<label for="degree_program">Bachelor/Master/MPhil/PHP<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="degree_program" name="degree_program" placeholder="Enter your Degree Program" value="<?= isset($old['degree_program']) ? $old['degree_program'] : '' ?>">
 					</div>
 
-					<div class="form-group my-2">
-						<label for="date_of_birth">Date of Birth<span class="text-danger">*</span></label>
-						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?= isset($old['date_of_birth']) ? $old['date_of_birth'] : '' ?>">
-					</div>
 					<div class="form-group my-2">
 						<label for="education_level">Education Level/Degree<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="education_level" name="education_level" placeholder="Enter your Education Level" value="<?= isset($old['education_level']) ? $old['education_level'] : '' ?>">
@@ -129,32 +154,6 @@
 					<div class="form-group my-2">
 						<label for="office_phone">Office Phone(if any)</label>
 						<input type="text" class="form-control" id="office_phone" name="office_phone" placeholder="Enter your Office Phone Number" value="<?= isset($old['office_phone']) ? $old['office_phone'] : '' ?>">
-					</div>
-					<div class="form-group my-2">
-						<label for="mobile_phone">Mobile Phone<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="mobile_phone" name="mobile_phone" placeholder="Enter your Mobile Phone Number" value="<?= isset($old['mobile_phone']) ? $old['mobile_phone'] : '' ?>">
-					</div>
-					<div class="form-group my-2">
-						<label for="whatsapp_no">Whatsapp No.<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="whatsapp_no" name="whatsapp_no" placeholder="Enter your Whatsapp Number" value="<?= isset($old['whatsapp_no']) ? $old['whatsapp_no'] : '' ?>">
-					</div>
-					<div class="form-group my-2">
-						<label for="address">Home Address<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="address" name="address" placeholder="Enter your Home Address" value="<?= isset($old['address']) ? $old['address'] : '' ?>">
-					</div>
-					<div class="form-group my-2">
-						<label for="city">City<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="city" name="city" placeholder="Enter your City Name" value="<?= isset($old['city']) ? $old['city'] : '' ?>">
-					</div>
-
-					<div class="form-group my-2">
-						<label for="province">State/Province<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="province" name="province" placeholder="Enter your Province Name" value="<?= isset($old['province']) ? $old['province'] : '' ?>">
-					</div>
-
-					<div class="form-group my-2">
-						<label for="postal_code">Postal Code<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="postal_code" name="postal_code" placeholder="Enter your Postal Code Number" value="<?= isset($old['postal_code']) ? $old['postal_code'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">

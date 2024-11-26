@@ -80,3 +80,4 @@ $route['email_request'] = 'Home/email_request';
 $route['email_request_save']['post'] = 'Home/emailRequestSave';
 $route['email_verify'] = 'Home/email_verify';
 $route['email_verify_otp']['post'] = 'Home/verifyOTP';
+$route['resend_otp']['post'] = 'Home/emailRequestSendOTP';

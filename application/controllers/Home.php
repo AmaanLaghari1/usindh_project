@@ -772,39 +772,61 @@ class Home extends BaseController {
 		$input_otp = $this->input->post('otp_input');
 		$stored_otp = $this->session->userdata('otp_code');
 		$expiry = $this->session->userdata('otp_expiry');
-		// Check if OTP exists and is not expired
-		if ($stored_otp && $expiry && time() < $expiry) {
-			if ($input_otp == $stored_otp) {
-				// OTP is correct and not expired, proceed with your logic
-				$this->session->unset_userdata('otp_code'); // Optionally clear OTP after successful validation
-				$this->session->unset_userdata('otp_expiry');
-				$emailRequestData = get_cookie('email_request_data');
-				if($this->EmailRequest_model->create(json_decode($emailRequestData))){
-					$this->session->set_flashdata('response', array(
-						'type' => 'success',
-						'message' => 'application submitted successfully',
-						'title' => 'Done'
-					));
-					return redirect('email_request');
-				}
-			} else {
-				$this->set_flashdata('response', array(
-					'type' => 'danger',
-					'message' => 'OTP incorrect',
-					'title' => 'Failed'
+
+		// Ensure all necessary data exists
+		if (!$stored_otp || !$expiry) {
+			$this->session->set_flashdata('response', array(
+				'type' => 'danger',
+				'message' => 'OTP not found or expired.',
+				'title' => 'Failed'
+			));
+			return redirect('email_verify');
+		}
+
+		// Use current timestamp to check expiry
+		$current_time = time();
+		if ($current_time > $expiry) {
+			// OTP has expired
+			$this->session->unset_userdata('otp_code');
+			$this->session->unset_userdata('otp_expiry');
+			$this->session->set_flashdata('response', array(
+				'type' => 'danger',
+				'message' => 'OTP has expired. Please request a new one.',
+				'title' => 'Failed'
+			));
+			return redirect('email_verify');
+		}
+
+		// Validate the OTP
+		if ($input_otp == $stored_otp) {
+			// OTP is correct, proceed with your logic
+			$this->session->unset_userdata('otp_code');
+			$this->session->unset_userdata('otp_expiry');
+
+			// Retrieve request data from the cookie
+			$emailRequestData = get_cookie('email_request_data');
+			if ($this->EmailRequest_model->create(json_decode($emailRequestData))) {
+				$this->session->set_flashdata('response', array(
+					'type' => 'success',
+					'message' => 'Application submitted successfully.',
+					'title' => 'Done'
 				));
-				return redirect('email_verify');
+				return redirect('email_request');
 			}
 		} else {
-			// OTP expired or doesn't exist
-			$this->session->unset_userdata('otp_code'); // Clear expired OTP
-			$this->session->unset_userdata('otp_expiry');
-			return false;
+			// OTP is incorrect
+			$this->session->set_flashdata('response', array(
+				'type' => 'danger',
+				'message' => 'Invalid OTP. Please try again.',
+				'title' => 'Failed'
+			));
+			return redirect('email_verify');
 		}
 	}
-	private function emailRequestSendOTP(){
+
+	public function emailRequestSendOTP(){
 		$code = rand(1000, 9999);
-		$expiry = 300;
+		$expiry = time() + 30;
 		$this->session->set_userdata('otp_code', $code);
 		$this->session->set_userdata('otp_expiry', $expiry);
 	}
