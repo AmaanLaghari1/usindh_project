@@ -1467,4 +1467,15 @@ function api_sms_zong($to,$message){
 // print_r($resultBulkSMS);
 }
 
+if (!function_exists('flashMsg')) {
+	function flashAlert($title = '', $msg = '', $type = 'info') {
+		$CI =& get_instance(); // Get the CodeIgniter instance
+		$CI->session->set_flashdata('response', array(
+			'title' => $title,
+			'message' => $msg,
+			'type' => $type
+		));
+	}
+}
+
 

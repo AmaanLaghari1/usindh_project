@@ -9,6 +9,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require "BaseController.php";
 
+require_once FCPATH . 'vendor/autoload.php';
+use Dompdf\Dompdf;
+
 
 class Home extends BaseController {
     /**
@@ -768,6 +771,29 @@ class Home extends BaseController {
 
 	}
 
+	public function generate_pdf($id) {
+		// Load Composer's autoloader
+		require_once FCPATH . 'vendor/autoload.php';
+		die($id);
+		// Initialize DOMPDF
+		$dompdf = new Dompdf();
+
+		// Sample HTML content for the PDF
+		$html = $this->load->view('pdf_template', array('data' => $data), true);
+
+		// Load HTML content into DOMPDF
+		$dompdf->loadHtml($html);
+
+		// Set paper size (A4) and orientation (portrait)
+		$dompdf->setPaper('A4', 'portrait');
+
+		// Render the PDF (first pass)
+		$dompdf->render();
+
+		// Output the generated PDF (streaming it to the browser)
+		$dompdf->stream("email_request_application.pdf", ["Attachment" => 0]);  // 0 means display in the browser
+	}
+
 	public function verifyOTP() {
 		$input_otp = $this->input->post('otp_input');
 		$stored_otp = $this->session->userdata('otp_code');
@@ -780,6 +806,7 @@ class Home extends BaseController {
 				'message' => 'OTP not found or expired.',
 				'title' => 'Failed'
 			));
+
 			return redirect('email_verify');
 		}
 
@@ -811,6 +838,11 @@ class Home extends BaseController {
 					'message' => 'Application submitted successfully.',
 					'title' => 'Done'
 				));
+
+//				echo $this->db->insert_id();
+				$id = md5($this->db->insert_id());
+				return redirect('email_pdf/'. $id);
+//				$this->generate_pdf(json_decode($emailRequestData));
 				return redirect('email_request');
 			}
 		} else {
@@ -826,7 +858,7 @@ class Home extends BaseController {
 
 	public function emailRequestSendOTP(){
 		$code = rand(1000, 9999);
-		$expiry = time() + 300;
+		$expiry = time() + 30;
 		$this->session->set_userdata('otp_code', $code);
 		$this->session->set_userdata('otp_expiry', $expiry);
 	}
@@ -903,24 +935,27 @@ class Home extends BaseController {
 			$data['ADDITIONAL_CHARGE'] = $this->input->post('additional_charge');
 		}
 
+//		Email check
 		if($this->EmailRequest_model->ifExists('EMAIL', $this->input->post('email'))){
-			$this->session->set_flashdata('response', array(
-				'type' => 'danger',
-				'message' => 'Email already exists',
-				'title' => 'Failed'
-			));
+			flashAlert('Failed', 'Email already exists', 'danger');
 			return redirect('email_request');
 		}
 		else {
 			$this->session->set_userdata('isVerified', FALSE);
 		}
 
+//		CNIC check
 		if($this->EmailRequest_model->ifExists('CNIC_NO', $this->input->post('cnic_no'))){
-			$this->session->set_flashdata('response', array(
-				'type' => 'danger',
-				'message' => 'CNIC already exists',
-				'title' => 'Failed'
-			));
+			flashAlert('Failed', 'CNIC already exists', 'danger');
+			return redirect('email_request');
+		}
+
+//		Date of Birth check
+		$currentDate = new DateTime();
+		$dob = new DateTime($this->input->post('date_of_birth'));
+		$age = $currentDate->diff($dob)->y;
+		if($age < 18){
+			flashAlert('Failed', 'Your age must be more than 18 years', 'danger');
 			return redirect('email_request');
 		}
 

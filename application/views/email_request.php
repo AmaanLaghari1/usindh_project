@@ -27,16 +27,6 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 						</select>
 					</div>
 
-					<div class="form-group my-2 std">
-						<label for="roll_no">Roll No</label>
-						<input type="text" class="form-control" id="roll_no" name="roll_no" placeholder="Enter your Roll No" value="<?= isset($old['roll_no']) ? $old['roll_no'] : '' ?>">
-					</div>
-
-					<div class="form-group my-2 other">
-						<label for="staff_or_faculty_id">Staff/Faculty ID</label>
-						<input type="text" class="form-control" id="roll_no" name="staff_or_faculty_id" placeholder="Enter your Roll No" value="<?= isset($old['staff_or_faculty_id']) ? $old['staff_or_faculty_id'] : '' ?>">
-					</div>
-
 					<div class="form-group my-2">
 						<label for="first_name">First Name<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First Name" value="<?= isset($old['first_name']) ? $old['first_name'] : '' ?>">
@@ -89,6 +79,16 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 						<input type="text" class="form-control" id="city" name="city" placeholder="Enter your City Name" value="<?= isset($old['city']) ? $old['city'] : '' ?>">
 					</div>
 
+					<div class="form-group my-2 std">
+						<label for="roll_no">Roll No<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="roll_no" name="roll_no" placeholder="Enter your Roll No" value="<?= isset($old['roll_no']) ? $old['roll_no'] : '' ?>">
+					</div>
+
+					<div class="form-group my-2 other">
+						<label for="staff_or_faculty_id">Staff/Faculty ID<span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="roll_no" name="staff_or_faculty_id" placeholder="Enter your Roll No" value="<?= isset($old['staff_or_faculty_id']) ? $old['staff_or_faculty_id'] : '' ?>">
+					</div>
+
 					<div class="form-group my-2">
 						<label for="department">Department<span class="text-danger">*</span></label>
 						<select class="form-control" id="department" name="department">
@@ -105,7 +105,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 
 					<div class="form-group my-2 other">
 						<label for="department">Designation<span class="text-danger">*</span></label>
-						<input class="form-control" name="designation" id="designation" />
+						<input class="form-control" placeholder="Enter your Designation" name="designation" id="designation" />
 					</div>
 
 					<div class="form-group my-2 std">
@@ -170,7 +170,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 		$("#application-form").validate({
 			rules: {
 				// General rules for fields that are always required
-				cnic_no: { required: true, number: true },
+				cnic_no: { required: true, number: true, minlength: 13, maxlength: 13 },
 				email: { required: true, email: true },
 				department: { required: true },
 				first_name: { required: true, minlength: 3 },
@@ -185,8 +185,15 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				cnic_expiry: { required: true },
 			},
 			messages: {
-				email: { required: "Please enter your Current Email address" },
-				cnic_no: { required: "Please enter your CNIC number" },
+				email: {
+					required: "Please enter your Current Email address",
+					email: "Please enter a valid Email address"
+				},
+				cnic_no: {
+					required: "Please enter your CNIC number",
+					minlength: "CNIC must contain 13 digits",
+					maxlength: "CNIC must contain 13 digits"
+				},
 				department: { required: "Please select your Department" },
 				first_name: {
 					required: "Please enter your First Name",
@@ -198,7 +205,8 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				address: { required: "Please enter your Postal Address" },
 				city: { required: "Please enter your City Name" },
 				province: { required: "Please enter your State or Province Name" },
-				applicant_picture: { required: "Please chose a photo" }
+				applicant_picture: { required: "Please chose a photo" },
+				cnic_expiry: { required: "Please enter CNIC Expiry Date" }
 			}
 		});
 
