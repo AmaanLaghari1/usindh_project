@@ -46,7 +46,12 @@
     <!-- CSS | Theme Color -->
     <link href="<?=base_url()?>css/colors/theme-skin-color-set-1.css" rel="stylesheet" type="text/css">
 
-    <!-- external javascripts -->
+	<!-- Date Picker CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+
+
+	<!-- external javascripts -->
     <script src="<?=base_url()?>js/jquery-2.2.4.min.js"></script>
     <script src="<?=base_url()?>js/jquery-ui.min.js"></script>
     <script src="<?=base_url()?>js/bootstrap.min.js"></script>

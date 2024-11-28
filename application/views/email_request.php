@@ -1,5 +1,5 @@
 <?php
-//$old = $this->session->flashdata('old'); // Retrieve the flashdata
+$old = $this->session->flashdata('old'); // Retrieve the flashdata
 ?>
 <div class="main-content">
 	<div class="container p-3">
@@ -42,13 +42,13 @@
 						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First Name" value="<?= isset($old['first_name']) ? $old['first_name'] : '' ?>">
 					</div>
 					<div class="form-group my-2">
-						<label for="last_name">Last Name<span class="text-danger">*</span></label>
+						<label for="last_name">Last Name</label>
 						<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your Last Name" value="<?= isset($old['last_name']) ? $old['last_name'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
 						<label for="date_of_birth">Date of Birth<span class="text-danger">*</span></label>
-						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="<?= isset($old['date_of_birth']) ? $old['date_of_birth'] : '' ?>">
+						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Enter your Date of Birth" value="<?= isset($old['date_of_birth']) ? $old['date_of_birth'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
@@ -58,7 +58,7 @@
 
 					<div class="form-group my-2">
 						<label for="cnic_expiry">CNIC Expiry Date<span class="text-danger">*</span></label>
-						<input type="date" class="form-control" id="cnic_expiry" name="cnic_expiry" placeholder="Enter your CNIC" value="<?= isset($old['cnic_expiry']) ? $old['cnic_expiry'] : '' ?>">
+						<input type="date" class="form-control" id="cnic_expiry" name="cnic_expiry" placeholder="Enter your CNIC Expiry Date" value="<?= isset($old['cnic_expiry']) ? $old['cnic_expiry'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
@@ -96,7 +96,7 @@
 							<?php
 							foreach ($departments as $dept){
 								?>
-								<option value="<?= $dept->DEPT_ID ?>"><?= $dept->DEPT_NAME ?></option>
+								<option value="<?= $dept->DEPT_ID ?>" <?= isset($old) && $old['department'] == $dept->DEPT_ID ? 'selected': '' ?>><?= $dept->DEPT_NAME ?></option>
 							<?php
 							}
 							?>
@@ -105,27 +105,18 @@
 
 					<div class="form-group my-2 other">
 						<label for="department">Designation<span class="text-danger">*</span></label>
-						<select class="form-control" id="department" name="department">
-							<option value="">Select Designation</option>
-							<?php
-							foreach ($departments as $dept){
-								?>
-								<option value="<?= $dept->DEPT_ID ?>"><?= $dept->DEPT_NAME ?></option>
-								<?php
-							}
-							?>
-						</select>
+						<input class="form-control" name="designation" id="designation" />
 					</div>
 
-<!--					<div class="form-group my-2 other">-->
-<!--						<label for="faculty_type">Faculty Type</label>-->
-<!--						<select class="form-control" id="faculty_type" name="faculty_type">-->
-<!--							<option value="">Select Faculty Type</option>-->
-<!--						</select>-->
-<!--					</div>-->
 					<div class="form-group my-2 std">
-						<label for="degree_program">Bachelor/Master/MPhil/PHP<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="degree_program" name="degree_program" placeholder="Enter your Degree Program" value="<?= isset($old['degree_program']) ? $old['degree_program'] : '' ?>">
+						<label for="degree_program">Degree Program<span class="text-danger">*</span></label>
+						<select class="form-control" id="degree_program" name="degree_program">
+							<option value="" <?= isset($old) && $old['degree_program'] == '' ? 'selected': '' ?>>Select Degree Program</option>
+							<option value="bachelor" <?= isset($old) && $old['degree_program'] == 'bachelor' ? 'selected': '' ?>>Bachelor</option>
+							<option value="master" <?= isset($old) && $old['degree_program'] == 'master'  ? 'selected' : ''?>>Master</option>
+							<option value="mphil" <?= isset($old) && $old['degree_program'] == 'mphil'  ? 'selected': ''?>>MPhil</option>
+							<option value="phd" <?= isset($old) && $old['degree_program'] == 'phd'  ? 'selected': ''?>>PhD</option>
+						</select>
 					</div>
 
 					<div class="form-group my-2">
@@ -151,7 +142,7 @@
 						<label for="additional_charge">Additional Charge</label>
 						<input type="text" class="form-control" id="additional_charge" name="additional_charge" placeholder="Enter your Additional Charge" value="<?= isset($old['additional_charge']) ? $old['additional_charge'] : '' ?>">
 					</div>
-					<div class="form-group my-2">
+					<div class="form-group my-2 other">
 						<label for="office_phone">Office Phone(if any)</label>
 						<input type="text" class="form-control" id="office_phone" name="office_phone" placeholder="Enter your Office Phone Number" value="<?= isset($old['office_phone']) ? $old['office_phone'] : '' ?>">
 					</div>
@@ -169,87 +160,10 @@
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
 	$(document).ready(function(){
 		$(".other").hide()
-
-
-		$("#otp-form").validate({
-			rules: {
-				roll_no: {
-					required: true,
-				},
-				email: {
-					required: true,
-				}
-			},
-			messages: {
-				roll_no: {
-					required: 'Roll No is required',
-				},
-				email: {
-					required: 'Email is required',
-				}
-			},
-			submitHandler: function(form) {
-
-				$.ajax({
-					url: 'email_request_send_otp',
-					type: 'POST',
-					data: {
-						email: form.email.value,
-						'<?= $this->security->get_csrf_token_name(); ?>': '<?= $this->security->get_csrf_hash(); ?>'
-					},
-					dataType: 'json',
-					success: function(response){
-						console.log(response);
-						let timeLeft = <?= $_SESSION['otp_expiry']??0 ?>;
-						$("#send-otp-btn").prop("disabled", true);
-						const interval = setInterval(function() {
-							if (timeLeft <= 0) {
-								clearInterval(interval);
-								$("#countdown").text(''); // Clear countdown display
-								$("#send-otp-btn").prop('disabled', false); // Enable the button
-								return;
-							}
-
-							// Update time left (in minutes and seconds)
-							let minutes = Math.floor(timeLeft / 60);
-							let seconds = timeLeft % 60;
-							$("#countdown").text(`You can resend OTP in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
-
-							timeLeft--; // Decrement time left
-						}, 1000);
-					}
-				})
-			}
-		})
-
-		$("#role_no").blur(function(){
-			let rollNo = $(this).val()
-
-			if (rollNo){
-				$.ajax({
-					url: 'email_request_fetch',
-					type: 'POST',
-					data: {
-						roll_no: rollNo,
-						'<?= $this->security->get_csrf_token_name(); ?>': '<?= $this->security->get_csrf_hash(); ?>'
-					},
-					dataType: 'json',
-					success: function(data){
-						console.log("Data",data)
-						if(data['exist']['email']) {
-							$("#email").val(data.exist.email)
-						}
-						else {
-							$("#email").val('')
-						}
-					}
-				})
-			}
-		})
-
 
 	// 	Handle Application Form Validations
 		// Initialize form validation on the form
@@ -259,22 +173,32 @@
 				cnic_no: { required: true, number: true },
 				email: { required: true, email: true },
 				department: { required: true },
-				first_name: { required: true },
-				last_name: { required: true },
+				first_name: { required: true, minlength: 3 },
 				education_level: { required: true },
 				mobile_phone: { required: true },
 				whatsapp_no: { required: true },
 				date_of_birth: { required: true },
 				address: { required: true },
 				city: { required: true },
-				postal_code: { required: true },
 				province: { required: true },
 				applicant_picture: { required: true },
 				cnic_expiry: { required: true },
 			},
 			messages: {
-				email: { required: "Please enter a your Email address" },
+				email: { required: "Please enter your Current Email address" },
 				cnic_no: { required: "Please enter your CNIC number" },
+				department: { required: "Please select your Department" },
+				first_name: {
+					required: "Please enter your First Name",
+				},
+				education_level: "Please enter your Education Level",
+				mobile_phone: { required: "Please enter your Mobile Phone" },
+				whatsapp_no: { required: "Please enter your Whatsapp No" },
+				date_of_birth: { required: "Please enter your Date of Birth" },
+				address: { required: "Please enter your Postal Address" },
+				city: { required: "Please enter your City Name" },
+				province: { required: "Please enter your State or Province Name" },
+				applicant_picture: { required: "Please chose a photo" }
 			}
 		});
 
@@ -290,13 +214,13 @@
 				$(".std").hide();
 
 				// Set required rules for "Other" role-specific fields
-				$("#faculty_type").rules("add", {
+				$("#staff_or_faculty_id").rules("add", {
 					required: true,
-					messages: { required: "Please select a faculty type" }
+					messages: { required: "Please enter your ID" }
 				});
 				$("#date_of_appointment").rules("add", {
 					required: true,
-					messages: { required: "Please enter a date of appointment" }
+					messages: { required: "Please enter a Date of Appointment" }
 				});
 			} else { // If 'Student' role is selected
 				$(".std").show();
@@ -305,11 +229,11 @@
 				// Set required rules for "Student" role-specific fields
 				$("#roll_no").rules("add", {
 					required: true,
-					messages: { required: "Please enter your roll number" }
+					messages: { required: "Please enter your Student ID" }
 				});
 				$("#degree_program").rules("add", {
 					required: true,
-					messages: { required: "Please enter your degree program" }
+					messages: { required: "Please select your Degree Program" }
 				});
 			}
 		}
@@ -321,6 +245,20 @@
 		$("#user_role").on("change", function () {
 			toggleRoleFields();
 		});
+
+		const numberFields = ['cnic_no', 'mobile_phone', 'whatsapp_no', 'office_phone'];
+
+		numberFields.forEach(function (item){
+			$(`#${item}`).on("input", function(){
+				$(this).val($(this).val().replace(/[^0-9]/g, ''))
+			})
+		});
+
+		$("#cnic_no").on("input", function(){
+			$(this).val($(this).val().replace(/[^0-9]/g, ''))
+		})
+
+		flatpickr("#date_of_birth, #cnic_expiry, #date_of_appointment");
 
 	})
 </script>

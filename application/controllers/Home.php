@@ -826,14 +826,14 @@ class Home extends BaseController {
 
 	public function emailRequestSendOTP(){
 		$code = rand(1000, 9999);
-		$expiry = time() + 30;
+		$expiry = time() + 300;
 		$this->session->set_userdata('otp_code', $code);
 		$this->session->set_userdata('otp_expiry', $expiry);
 	}
 	private function uploadImage($file)
 	{
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'jpg';
+		$config['allowed_types'] = '*';
 		$config['max_size'] = 2048;
 		$config['max_width'] = 1024;
 		$config['max_height'] = 768;
@@ -858,10 +858,18 @@ class Home extends BaseController {
 			return $fileData;
 		}
 	}
-
 	public function emailRequestSave(){
 		$this->session->set_flashdata('old', $this->input->post());
 		$role = $this->input->post('user_role');
+
+		if(!$this->EmailRequest_model->emailRequestValidated($role)){
+			$this->session->set_flashdata('response', array(
+				'title' => 'Failed',
+				'message' => validation_errors(),
+				'type' => 'danger',
+			));
+			return redirect('email_request');
+		}
 
 		$data = array(
 			'ROLE' => $role,
@@ -928,17 +936,6 @@ class Home extends BaseController {
 		$this->emailRequestSendOTP();
 
 		return redirect('email_verify');
-
-//		if($this->EmailRequest_model->create($data)){
-//			$this->session->set_flashdata('response', array(
-//				'type' => 'success',
-//				'message' => 'application submitted successfully',
-//				'title' => 'Done'
-//			));
-//			return redirect('email_request');
-//		}
 	}
-
-
 
 }

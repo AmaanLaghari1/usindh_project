@@ -74,4 +74,112 @@ class EmailRequest_model extends CI_Model
 		$this->db->where($this->primaryKey, $id);
 		return $this->db->delete($this->table);
 	}
+
+	public function emailRequestValidated($role){
+		$config = array(
+			array(
+				'field' => 'first_name',
+				'label' => 'First Name',
+				'rules' => 'trim|required|min_length[3]'
+			),
+			array(
+				'field' => 'cnic_no',
+				'label' => 'CNIC',
+				'rules' => 'required',
+				'errors' => array(
+					'required' => 'You must provide a %s.',
+				),
+			),
+			array(
+				'field' => 'cnic_expiry',
+				'label' => 'CNIC Expiry Date',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => array('required', 'email')
+			),
+			array(
+				'field' => 'date_of_birth',
+				'label' => 'Date of Birth',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'mobile_phone',
+				'label' => 'Mobile Phone',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'whatsapp_no',
+				'label' => 'Whatsapp No.',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'address',
+				'label' => 'Postal Address',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'province',
+				'label' => 'State/Province',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'city',
+				'label' => 'City',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'department',
+				'label' => 'Department',
+				'rules' => 'required'
+			),
+		);
+
+		if($role == 1){
+			$config[] = array(
+				'field' => 'roll_no',
+				'label' => 'Student ID',
+				'rules' => 'required'
+			);
+			$config[] = array(
+				'field' => 'degree_program',
+				'label' => 'Degree Program',
+				'rules' => 'required'
+			);
+			$config[] = array(
+				'field' => 'education_level',
+				'label' => 'Education Level',
+				'rules' => 'required'
+			);
+		}
+		else {
+			$config[] = array(
+				'field' => 'staff_or_faculty_id',
+				'label' => 'Staff/Faculty ID',
+				'rules' => 'required'
+			);
+			$config[] = array(
+				'field' => 'date_of_appointment',
+				'label' => 'Date of Appointment',
+				'rules' => 'required'
+			);
+		}
+
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules($config);
+
+		if ($this->form_validation->run() == FALSE){
+			return FALSE;
+		}
+
+		return TRUE;
+	}
 }
