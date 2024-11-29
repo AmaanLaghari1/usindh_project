@@ -98,6 +98,7 @@ $autoload['helper'] = array(
 	'directory',
 	'validation_function',
 	'cookie',
+	'email'
 );
 
 /*

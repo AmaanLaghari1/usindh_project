@@ -43,7 +43,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 
 					<div class="form-group my-2">
 						<label for="cnic_no">CNIC No. (without dashes)<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="cnic_no" name="cnic_no" placeholder="Enter your CNIC" value="<?= isset($old['cnic_no']) ? $old['cnic_no'] : '' ?>">
+						<input type="text" class="form-control" id="cnic_no" name="cnic_no" maxlength="13" placeholder="Enter your CNIC" value="<?= isset($old['cnic_no']) ? $old['cnic_no'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
@@ -57,11 +57,11 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					</div>
 
 					<div class="form-group my-2">
-						<label for="mobile_phone">Mobile Phone<span class="text-danger">*</span></label>
+						<label for="mobile_phone">Mobile Phone (11 digits only)<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="mobile_phone" name="mobile_phone" placeholder="Enter your Mobile Phone Number" value="<?= isset($old['mobile_phone']) ? $old['mobile_phone'] : '' ?>">
 					</div>
 					<div class="form-group my-2">
-						<label for="whatsapp_no">Whatsapp No.<span class="text-danger">*</span></label>
+						<label for="whatsapp_no">WhatsApp No. (11 digits only)<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="whatsapp_no" name="whatsapp_no" placeholder="Enter your Whatsapp Number" value="<?= isset($old['whatsapp_no']) ? $old['whatsapp_no'] : '' ?>">
 					</div>
 
@@ -80,7 +80,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					</div>
 
 					<div class="form-group my-2 std">
-						<label for="roll_no">Roll No<span class="text-danger">*</span></label>
+						<label for="roll_no">Roll No.<span class="text-danger">*</span></label>
 						<input type="text" class="form-control" id="roll_no" name="roll_no" placeholder="Enter your Roll No" value="<?= isset($old['roll_no']) ? $old['roll_no'] : '' ?>">
 					</div>
 
@@ -148,7 +148,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					</div>
 
 					<div class="form-group my-2">
-						<label for="applicant_picture">Applicant Picture<span class="text-danger">*</span></label>
+						<label for="applicant_picture">Applicant Picture (white background, 2x2 dimensions, 500KB max)<span class="text-danger">*</span></label>
 						<input type="file" class="form-control" id="applicant_picture" name="applicant_picture">
 					</div>
 					<div class="form-group my-2">
@@ -175,8 +175,8 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				department: { required: true },
 				first_name: { required: true, minlength: 3 },
 				education_level: { required: true },
-				mobile_phone: { required: true },
-				whatsapp_no: { required: true },
+				mobile_phone: { required: true, minlength: 11 },
+				whatsapp_no: { required: true, minlength: 11 },
 				date_of_birth: { required: true },
 				address: { required: true },
 				city: { required: true },
@@ -199,8 +199,14 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					required: "Please enter your First Name",
 				},
 				education_level: "Please enter your Education Level",
-				mobile_phone: { required: "Please enter your Mobile Phone" },
-				whatsapp_no: { required: "Please enter your Whatsapp No" },
+				mobile_phone: {
+					required: "Please enter your Mobile Phone",
+					minlength: "Invalid Mobile Phone No."
+				},
+				whatsapp_no: {
+					required: "Please enter your Whatsapp No",
+					minlength: "Invalid WhatsApp No."
+				},
 				date_of_birth: { required: "Please enter your Date of Birth" },
 				address: { required: "Please enter your Postal Address" },
 				city: { required: "Please enter your City Name" },
@@ -215,7 +221,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 			const role = $("#user_role").val();
 
 			// Clear previous role-specific validation rules
-			$('#roll_no, #faculty_type, #degree_program').rules("remove");
+			$('#roll_no, #degree_program').rules("remove");
 
 			if (role !== '1') { // If 'Other' role is selected
 				$(".other").show();
@@ -259,12 +265,15 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 		numberFields.forEach(function (item){
 			$(`#${item}`).on("input", function(){
 				$(this).val($(this).val().replace(/[^0-9]/g, ''))
+				let maxLength = 11
+				if(item === 'cnic_no'){
+					maxLength = 13
+				}
+				if(maxLength > 0){
+					$(this).val($(this).val().substr(0, maxLength));
+				}
 			})
 		});
-
-		$("#cnic_no").on("input", function(){
-			$(this).val($(this).val().replace(/[^0-9]/g, ''))
-		})
 
 		flatpickr("#date_of_birth, #cnic_expiry, #date_of_appointment");
 

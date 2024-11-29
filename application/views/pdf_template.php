@@ -32,7 +32,7 @@ $data->APPLICANT_PICTURE_BASE64 = 'data:image/jpeg;base64,' . $imageData;
 	</tr>
 	<tr>
 		<th>Student ID</th>
-		<td><?php echo $data->STUDENT_ID; ?></td>
+		<td><?php echo $data->STUDENT_ID??''; echo $data->STAFF_OR_FACULTY_ID??''; ?></td>
 	</tr>
 	<tr>
 		<th>First Name</th>
@@ -71,8 +71,8 @@ $data->APPLICANT_PICTURE_BASE64 = 'data:image/jpeg;base64,' . $imageData;
 		<td><?php echo $data->PROVINCE; ?></td>
 	</tr>
 	<tr>
-		<th>Postal Code</th>
-		<td><?php echo $data->POSTAL_CODE; ?></td>
+		<th>PDF Link</th>
+		<td><?= $pdf_url ?></td>
 	</tr>
 
 </table>

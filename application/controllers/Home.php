@@ -715,6 +715,32 @@ class Home extends BaseController {
     }
 
 
+	private function encode_id($id) {
+		$encryption_key = 'your_secret_key_here'; // Use a strong, unique key
+		$iv = random_bytes(16); // Generate a random IV (Initialization Vector)
+
+		// Encrypt the primary key
+		$encrypted = openssl_encrypt($id, 'AES-256-CBC', $encryption_key, 0, $iv);
+
+		// Combine IV and encrypted data, and make the result URL-safe
+		return rtrim(strtr(base64_encode($iv . $encrypted), '+/', '-_'), '=');
+	}
+
+	private function decode_id($encoded_id) {
+		$encryption_key = 'your_secret_key_here'; // Use the same key as in encode_id
+
+		// Convert URL-safe Base64 back to standard Base64
+		$data = base64_decode(strtr($encoded_id, '-_', '+/'));
+
+		// Extract IV and encrypted data
+		$iv = substr($data, 0, 16);
+		$encrypted = substr($data, 16);
+
+		// Decrypt to get the original ID
+		return intval(openssl_decrypt($encrypted, 'AES-256-CBC', $encryption_key, 0, $iv));
+	}
+
+
 	public function email_request(){
 		$website_url="usindh";
 		$website_obj =  $this->Website_model->getWebsiteByUrl($website_url);
@@ -774,12 +800,17 @@ class Home extends BaseController {
 	public function generate_pdf($id) {
 		// Load Composer's autoloader
 		require_once FCPATH . 'vendor/autoload.php';
-		die($id);
 		// Initialize DOMPDF
 		$dompdf = new Dompdf();
 
+		echo base64_decode($id);
+		die();
+//		TODO encode/decode id
+
+		$data = json_decode(get_cookie('email_request_data'));
+
 		// Sample HTML content for the PDF
-		$html = $this->load->view('pdf_template', array('data' => $data), true);
+		$html = $this->load->view('pdf_template', array('data' => $data, 'track_id' => $id, 'pdf_url' => current_url()), true);
 
 		// Load HTML content into DOMPDF
 		$dompdf->loadHtml($html);
@@ -791,7 +822,7 @@ class Home extends BaseController {
 		$dompdf->render();
 
 		// Output the generated PDF (streaming it to the browser)
-		$dompdf->stream("email_request_application.pdf", ["Attachment" => 0]);  // 0 means display in the browser
+		$dompdf->stream("email_request_application.pdf", array("Attachment" => 0));  // 0 means display in the browser
 	}
 
 	public function verifyOTP() {
@@ -801,12 +832,7 @@ class Home extends BaseController {
 
 		// Ensure all necessary data exists
 		if (!$stored_otp || !$expiry) {
-			$this->session->set_flashdata('response', array(
-				'type' => 'danger',
-				'message' => 'OTP not found or expired.',
-				'title' => 'Failed'
-			));
-
+			flashAlert('Failed', 'OTP not found or expired.', 'danger');
 			return redirect('email_verify');
 		}
 
@@ -816,11 +842,7 @@ class Home extends BaseController {
 			// OTP has expired
 			$this->session->unset_userdata('otp_code');
 			$this->session->unset_userdata('otp_expiry');
-			$this->session->set_flashdata('response', array(
-				'type' => 'danger',
-				'message' => 'OTP has expired. Please request a new one.',
-				'title' => 'Failed'
-			));
+			flashAlert('Failed', 'OTP has expired. Please request a new one', 'danger');
 			return redirect('email_verify');
 		}
 
@@ -833,34 +855,41 @@ class Home extends BaseController {
 			// Retrieve request data from the cookie
 			$emailRequestData = get_cookie('email_request_data');
 			if ($this->EmailRequest_model->create(json_decode($emailRequestData))) {
-				$this->session->set_flashdata('response', array(
-					'type' => 'success',
-					'message' => 'Application submitted successfully.',
-					'title' => 'Done'
-				));
-
+				flashAlert('Done', 'Application submitted successfully', 'success');
 //				echo $this->db->insert_id();
 				$id = md5($this->db->insert_id());
-				return redirect('email_pdf/'. $id);
+				return redirect('email_pdf/'. rtrim(base64_encode($id), '='));
 //				$this->generate_pdf(json_decode($emailRequestData));
 				return redirect('email_request');
 			}
 		} else {
 			// OTP is incorrect
-			$this->session->set_flashdata('response', array(
-				'type' => 'danger',
-				'message' => 'Invalid OTP. Please try again.',
-				'title' => 'Failed'
-			));
+			flashAlert('Failed', 'Invalid OTP Please try again', 'danger');
 			return redirect('email_verify');
 		}
 	}
 
-	public function emailRequestSendOTP(){
+	public function emailRequestSendOTP($email){
 		$code = rand(1000, 9999);
-		$expiry = time() + 30;
+		$expiry = time() + 300;
 		$this->session->set_userdata('otp_code', $code);
 		$this->session->set_userdata('otp_expiry', $expiry);
+
+//		Send Email
+		$param = array(
+			'to' => $email,
+			'subject' => 'University of Sindh - Email Request Application Verification',
+			'email_body' => 'Your otp code is ' . $code,
+			'sender_id' => 1,
+			'reply_to' => 'info@usindh.edu.pk',
+		);
+
+//		$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
+//
+//		if($response['response_code'] == 200){
+//			return true;
+//		}
+		return true;
 	}
 	private function uploadImage($file)
 	{
@@ -895,11 +924,7 @@ class Home extends BaseController {
 		$role = $this->input->post('user_role');
 
 		if(!$this->EmailRequest_model->emailRequestValidated($role)){
-			$this->session->set_flashdata('response', array(
-				'title' => 'Failed',
-				'message' => validation_errors(),
-				'type' => 'danger',
-			));
+			flashAlert('Failed', validation_errors(), 'danger');
 			return redirect('email_request');
 		}
 
@@ -951,13 +976,13 @@ class Home extends BaseController {
 		}
 
 //		Date of Birth check
-		$currentDate = new DateTime();
-		$dob = new DateTime($this->input->post('date_of_birth'));
-		$age = $currentDate->diff($dob)->y;
-		if($age < 18){
-			flashAlert('Failed', 'Your age must be more than 18 years', 'danger');
-			return redirect('email_request');
-		}
+//		$currentDate = new DateTime();
+//		$dob = new DateTime($this->input->post('date_of_birth'));
+//		$age = $currentDate->diff($dob)->y;
+//		if($age < 18){
+//			flashAlert('Failed', 'Your age must be more than 18 years', 'danger');
+//			return redirect('email_request');
+//		}
 
 		$image = $_FILES['applicant_picture'];
 		$file = $this->uploadImage($image);
@@ -968,9 +993,12 @@ class Home extends BaseController {
 
 		set_cookie('email_request_data', json_encode($data), 3600);
 
-		$this->emailRequestSendOTP();
+		if($this->emailRequestSendOTP($data['EMAIL'])){
+			return redirect('email_verify');
+		}
+		flashAlert('Failed', 'Error processing your application.', 'danger');
+		return redirect('email_request');
 
-		return redirect('email_verify');
 	}
 
 }

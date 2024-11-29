@@ -1396,7 +1396,7 @@ function CallAPI($method, $url, $data = false)
 
     return $result;
 }
-function postCURL($_url, $_param,$method="POST"){
+function postCURL($_url, $_param, $method="POST"){
 
 
 	    $data_string = json_encode($_param);
@@ -1467,7 +1467,7 @@ function api_sms_zong($to,$message){
 // print_r($resultBulkSMS);
 }
 
-if (!function_exists('flashMsg')) {
+if (!function_exists('flashAlert')) {
 	function flashAlert($title = '', $msg = '', $type = 'info') {
 		$CI =& get_instance(); // Get the CodeIgniter instance
 		$CI->session->set_flashdata('response', array(
@@ -1478,4 +1478,44 @@ if (!function_exists('flashMsg')) {
 	}
 }
 
+if (!function_exists('sendEmailApi')) {
+	function sendEmailApi($to, $subject, $email_body, $sender_id = 1, $reply_to = 'info@usindh.edu.pk') {
+		// API URL
+		$url = "https://itsc.usindh.edu.pk/sac/api/send_email_message";
+
+		// Data payload
+		$postData = array(
+			'to' => $to,
+			'subject' => $subject,
+			'sender_id' => $sender_id,
+			'reply_to' => $reply_to,
+			'email_body' => $email_body,
+		);
+
+		// cURL initialization
+		$ch = curl_init($url);
+
+		// Set options
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response as a string
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/x-www-form-urlencoded'
+		));
+
+		// Execute the request
+		$response = curl_exec($ch);
+
+		// Check for errors
+		if (curl_errno($ch)) {
+			return 'Error:' . curl_error($ch);
+		}
+
+		// Close cURL
+		curl_close($ch);
+
+		// Return response
+		return $response;
+	}
+}
 
