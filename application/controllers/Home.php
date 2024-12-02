@@ -715,29 +715,12 @@ class Home extends BaseController {
     }
 
 
-	private function encode_id($id) {
-		$encryption_key = 'your_secret_key_here'; // Use a strong, unique key
-		$iv = random_bytes(16); // Generate a random IV (Initialization Vector)
-
-		// Encrypt the primary key
-		$encrypted = openssl_encrypt($id, 'AES-256-CBC', $encryption_key, 0, $iv);
-
-		// Combine IV and encrypted data, and make the result URL-safe
-		return rtrim(strtr(base64_encode($iv . $encrypted), '+/', '-_'), '=');
+	function encode_id($id) {
+		return strtr(base64_encode($id), '+/=', '-_,');
 	}
 
-	private function decode_id($encoded_id) {
-		$encryption_key = 'your_secret_key_here'; // Use the same key as in encode_id
-
-		// Convert URL-safe Base64 back to standard Base64
-		$data = base64_decode(strtr($encoded_id, '-_', '+/'));
-
-		// Extract IV and encrypted data
-		$iv = substr($data, 0, 16);
-		$encrypted = substr($data, 16);
-
-		// Decrypt to get the original ID
-		return intval(openssl_decrypt($encrypted, 'AES-256-CBC', $encryption_key, 0, $iv));
+	function decode_id($encoded_id) {
+		return base64_decode(strtr($encoded_id, '-_,', '+/='));
 	}
 
 
@@ -803,14 +786,12 @@ class Home extends BaseController {
 		// Initialize DOMPDF
 		$dompdf = new Dompdf();
 
-		echo base64_decode($id);
-		die();
-//		TODO encode/decode id
+		$decodedId = $this->decode_id($id);
 
 		$data = json_decode(get_cookie('email_request_data'));
 
 		// Sample HTML content for the PDF
-		$html = $this->load->view('pdf_template', array('data' => $data, 'track_id' => $id, 'pdf_url' => current_url()), true);
+		$html = $this->load->view('pdf_template_2', array('data' => $data, 'track_id' => $id, 'pdf_url' => current_url()), true);
 
 		// Load HTML content into DOMPDF
 		$dompdf->loadHtml($html);
@@ -824,7 +805,6 @@ class Home extends BaseController {
 		// Output the generated PDF (streaming it to the browser)
 		$dompdf->stream("email_request_application.pdf", array("Attachment" => 0));  // 0 means display in the browser
 	}
-
 	public function verifyOTP() {
 		$input_otp = $this->input->post('otp_input');
 		$stored_otp = $this->session->userdata('otp_code');
@@ -856,10 +836,13 @@ class Home extends BaseController {
 			$emailRequestData = get_cookie('email_request_data');
 			if ($this->EmailRequest_model->create(json_decode($emailRequestData))) {
 				flashAlert('Done', 'Application submitted successfully', 'success');
-//				echo $this->db->insert_id();
-				$id = md5($this->db->insert_id());
-				return redirect('email_pdf/'. rtrim(base64_encode($id), '='));
-//				$this->generate_pdf(json_decode($emailRequestData));
+				$id = $this->db->insert_id();
+				$id = $this->encode_id($id);
+				redirect('email_pdf/'. $id, '=');
+				return 0;
+			}
+			else {
+				flashAlert('Done', 'Error processing application', 'danger');
 				return redirect('email_request');
 			}
 		} else {
@@ -868,36 +851,39 @@ class Home extends BaseController {
 			return redirect('email_verify');
 		}
 	}
-
-	public function emailRequestSendOTP($email){
+	public function emailRequestSendOTP(){
 		$code = rand(1000, 9999);
 		$expiry = time() + 300;
 		$this->session->set_userdata('otp_code', $code);
 		$this->session->set_userdata('otp_expiry', $expiry);
 
+		$emailRequestData = json_decode(get_cookie('email_request_data'));
 //		Send Email
 		$param = array(
-			'to' => $email,
+			'to' => $emailRequestData->EMAIL,
 			'subject' => 'University of Sindh - Email Request Application Verification',
 			'email_body' => 'Your otp code is ' . $code,
 			'sender_id' => 1,
 			'reply_to' => 'info@usindh.edu.pk',
 		);
 
-//		$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
+		$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
 //
-//		if($response['response_code'] == 200){
-//			return true;
-//		}
-		return true;
+		if($response['response_code'] == 200){
+			return redirect('email_verify');
+		}
+		else {
+			flashAlert('Failed', 'Error processing application', 'danger');
+			return redirect('email_verify');
+		}
 	}
 	private function uploadImage($file)
 	{
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = '*';
-		$config['max_size'] = 2048;
-		$config['max_width'] = 1024;
-		$config['max_height'] = 768;
+		$config['allowed_types'] = 'jpg|png|jpeg|webp';
+		$config['max_size'] = 500;
+		$config['max_width'] = 600;
+		$config['max_height'] = 1200;
 		$config['encrypt_name'] = TRUE;
 
 		$this->load->library('upload', $config);
@@ -935,7 +921,7 @@ class Home extends BaseController {
 			'CNIC_EXPIRY' => $this->input->post('cnic_expiry'),
 			'FIRST_NAME' => $this->input->post('first_name'),
 			'LAST_NAME' => $this->input->post('last_name'),
-			'DEPARTMENT' => $this->input->post('department'),
+			'DEPARTMENT_ID' => $this->input->post('department'),
 			'DATE_OF_BIRTH' => $this->input->post('date_of_birth'),
 			'RESEARCH_AREA' => $this->input->post('research_area'),
 			'MOBILE_PHONE' => $this->input->post('mobile_phone'),
@@ -943,7 +929,6 @@ class Home extends BaseController {
 			'ADDRESS' => $this->input->post('address'),
 			'CITY' => $this->input->post('city'),
 			'PROVINCE' => $this->input->post('province'),
-			'POSTAL_CODE' => $this->input->post('postal_code'),
 			'REQUEST_STATUS_ID' => 1
 		);
 
@@ -993,12 +978,7 @@ class Home extends BaseController {
 
 		set_cookie('email_request_data', json_encode($data), 3600);
 
-		if($this->emailRequestSendOTP($data['EMAIL'])){
-			return redirect('email_verify');
-		}
-		flashAlert('Failed', 'Error processing your application.', 'danger');
-		return redirect('email_request');
-
+		$this->emailRequestSendOTP();
 	}
 
 }

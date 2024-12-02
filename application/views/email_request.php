@@ -148,9 +148,13 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					</div>
 
 					<div class="form-group my-2">
-						<label for="applicant_picture">Applicant Picture (white background, 2x2 dimensions, 500KB max)<span class="text-danger">*</span></label>
-						<input type="file" class="form-control" id="applicant_picture" name="applicant_picture">
+						<label for="applicant_picture">Applicant Picture (white background, 2x2 dimensions, 500KB max)
+							<span class="text-danger">*</span>
+						</label>
+						<input type="file" class="form-control" id="applicant_picture" name="applicant_picture" accept="image/*">
+						<img id="applicant_picture_preview" src="" alt="Preview" style="display: none; margin-top: 10px; max-width: 100px; border: 1px solid #ccc;">
 					</div>
+
 					<div class="form-group my-2">
 						<button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
 					</div>
@@ -276,6 +280,32 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 		});
 
 		flatpickr("#date_of_birth, #cnic_expiry, #date_of_appointment");
+
+		$('#applicant_picture').on('change', function () {
+			const file = this.files[0]; // Get the selected file
+
+			if (file) {
+				// Check file type
+				if (!file.type.startsWith('image/')) {
+					alert('Please select a valid image file.');
+					return;
+				}
+
+				// Preview the image
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					$('#applicant_picture_preview')
+						.attr('src', e.target.result) // Set the image source to the file data
+						.css('display', 'block');   // Show the image
+				};
+				reader.readAsDataURL(file); // Read the file as a data URL
+			} else {
+				// Reset the preview if no file is selected
+				$('#applicant_picture_preview')
+					.attr('src', '')
+					.css('display', 'none');
+			}
+		});
 
 	})
 </script>

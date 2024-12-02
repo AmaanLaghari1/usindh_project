@@ -1,11 +1,16 @@
 <?php
 $imagePath = FCPATH . 'uploads/' . $data->APPLICANT_PICTURE; // Path to the uploaded image
 
+$logoPath = FCPATH . 'images/us_logo.png';
+
 // Convert the image to Base64
 $imageData = base64_encode(file_get_contents($imagePath));
+$logoData = base64_encode(file_get_contents($logoPath));
+
 
 // Pass the Base64 image data to the view
 $data->APPLICANT_PICTURE_BASE64 = 'data:image/jpeg;base64,' . $imageData;
+$data->LOGO = 'data:image/jpeg;base64,' . $logoData;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +26,9 @@ $data->APPLICANT_PICTURE_BASE64 = 'data:image/jpeg;base64,' . $imageData;
 	</style>
 </head>
 <body>
+<div class="container">
+	<img width="200" src="<?= $data->LOGO ?>" />
+</div>
 <h1 class="text-center">University of Sindh</h1>
 <h3 class="text-center">Email Request Application Form</h3>
 
