@@ -880,7 +880,7 @@ class Home extends BaseController {
 	private function uploadImage($file)
 	{
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'jpg|png|jpeg|webp';
+		$config['allowed_types'] = 'jpg|png|jpeg|webp|PNG|JPG';
 		$config['max_size'] = 500;
 		$config['max_width'] = 600;
 		$config['max_height'] = 1200;
@@ -919,30 +919,30 @@ class Home extends BaseController {
 			'EMAIL' => $this->input->post('email'),
 			'CNIC_NO' => $this->input->post('cnic_no'),
 			'CNIC_EXPIRY' => $this->input->post('cnic_expiry'),
-			'FIRST_NAME' => $this->input->post('first_name'),
-			'LAST_NAME' => $this->input->post('last_name'),
+			'FIRST_NAME' => strtoupper($this->input->post('first_name')),
+			'LAST_NAME' => strtoupper($this->input->post('last_name')),
 			'DEPARTMENT_ID' => $this->input->post('department'),
 			'DATE_OF_BIRTH' => $this->input->post('date_of_birth'),
-			'RESEARCH_AREA' => $this->input->post('research_area'),
+			'RESEARCH_AREA' => strtoupper($this->input->post('research_area')),
 			'MOBILE_PHONE' => $this->input->post('mobile_phone'),
 			'WHATSAPP_NO' => $this->input->post('whatsapp_no'),
-			'ADDRESS' => $this->input->post('address'),
-			'CITY' => $this->input->post('city'),
-			'PROVINCE' => $this->input->post('province'),
+			'ADDRESS' => strtoupper($this->input->post('address')),
+			'CITY' => strtoupper($this->input->post('city')),
+			'PROVINCE' => strtoupper($this->input->post('province')),
 			'REQUEST_STATUS_ID' => 1
 		);
 
 		if($role == 1){
 			$data['STUDENT_ID'] = $this->input->post('roll_no');
-			$data['DEGREE_PROGRAM'] = $this->input->post('degree_program');
-			$data['EDUCATION_LEVEL'] = $this->input->post('education_level');
-			$data['ADDITIONAL_QUALIFICATION'] = $this->input->post('additional_qualification');
+			$data['DEGREE_PROGRAM'] = strtoupper($this->input->post('degree_program'));
+			$data['EDUCATION_LEVEL'] = strtoupper($this->input->post('education_level'));
+			$data['ADDITIONAL_QUALIFICATION'] = strtoupper($this->input->post('additional_qualification'));
 		}
 		else {
 			$data['STAFF_OR_FACULTY_ID'] = $this->input->post('staff_or_faculty_id');
 			$data['OFFICE_PHONE'] = $this->input->post('office_phone');
 			$data['DATE_OF_APPOINTMENT'] = $this->input->post('date_of_appointment');
-			$data['ADDITIONAL_CHARGE'] = $this->input->post('additional_charge');
+			$data['ADDITIONAL_CHARGE'] = strtoupper($this->input->post('additional_charge'));
 		}
 
 //		Email check
@@ -959,7 +959,6 @@ class Home extends BaseController {
 			flashAlert('Failed', 'CNIC already exists', 'danger');
 			return redirect('email_request');
 		}
-
 //		Date of Birth check
 //		$currentDate = new DateTime();
 //		$dob = new DateTime($this->input->post('date_of_birth'));
@@ -979,6 +978,10 @@ class Home extends BaseController {
 		set_cookie('email_request_data', json_encode($data), 3600);
 
 		$this->emailRequestSendOTP();
+	}
+
+	public function email_request_status(){
+		echo "Status - Submitted";
 	}
 
 }
