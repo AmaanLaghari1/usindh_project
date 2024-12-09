@@ -714,16 +714,6 @@ class Home extends BaseController {
         $this->load->view('includes/footer_link',$data);
     }
 
-
-	function encode_id($id) {
-		return strtr(base64_encode($id), '+/=', '-_,');
-	}
-
-	function decode_id($encoded_id) {
-		return base64_decode(strtr($encoded_id, '-_,', '+/='));
-	}
-
-
 	public function email_request(){
 		$website_url="usindh";
 		$website_obj =  $this->Website_model->getWebsiteByUrl($website_url);
@@ -779,31 +769,60 @@ class Home extends BaseController {
 		$this->load->view('includes/footer_link',$data);
 
 	}
+	public function generateFPDF($id){
+		$this->load->library('pdf.php');
 
-	public function generate_pdf($id) {
-		// Load Composer's autoloader
-		require_once FCPATH . 'vendor/autoload.php';
-		// Initialize DOMPDF
-		$dompdf = new Dompdf();
+		$data = json_decode(get_cookie('email_request_data'), TRUE);
 
-		$decodedId = $this->decode_id($id);
+		$dept = $this->Department_model->getDepartmentById($data['DEPARTMENT_ID']);
 
-		$data = json_decode(get_cookie('email_request_data'));
+		$emailRequest = $this->EmailRequest_model->getByColumnValue('CREATED_AT', $data['CREATED_AT']);
 
-		// Sample HTML content for the PDF
-		$html = $this->load->view('pdf_template_2', array('data' => $data, 'track_id' => $id, 'pdf_url' => current_url()), true);
+		if($emailRequest){
+			$requestdata = array(
+				'FIRST NAME' => $emailRequest->FIRST_NAME??'-',
+				'LAST NAME' => $emailRequest->LAST_NAME??'-',
+				'EMAIL ADDRESS' => $emailRequest->EMAIL??'-',
+				'DATE OF BIRTH' => formatDate($emailRequest->DATE_OF_BIRTH)??'-',
+				'CNIC NO.' => $emailRequest->CNIC_NO??'-',
+				'CNIC EXPIRY DATE' => formatDate($emailRequest->CNIC_EXPIRY)??'-',
+				'MOBILE NO.' => $emailRequest->MOBILE_NO??'-',
+				'WHATSAPP NO.' => $emailRequest->WHATSAPP_NO??'-',
+				'POSTAL ADDRESS' => $emailRequest->ADDRESS??'-',
+				'STATE/PROVINCE' => $emailRequest->PROVINCE??'-',
+				'CITY' => $emailRequest->CITY??'-',
+			);
 
-		// Load HTML content into DOMPDF
-		$dompdf->loadHtml($html);
+			if($data['ROLE'] == 1){
+				$requestdata['ROLL NO./ STUDENT ID'] = $emailRequest->STUDENT_ID??'-';
+				$requestdata['DEGREE PROGRAM'] = $emailRequest->DEGREE_PROGRAM??'-';
+				$requestdata['DEPARTMENT'] = $dept[0]->DEPT_NAME;
+				$requestdata['EDUCATION LEVEL'] = $emailRequest->EDUCATION_LEVEL??'-';
+				$requestdata['RESEARCH AREA'] = $emailRequest->RESEARCH_AREA??'-';
+				$requestdata['ADDITIONAL QUALIFICATION'] = $emailRequest->ADDITIONAL_QUALIFICATION??'-';
+			}
+			else if($data['ROLE'] == 2 || $data['ROLE'] == 3) {
+				$requestdata['EMPLOYEE ID'] = $emailRequest->STAFF_OR_FACULTY_ID??'-';
+				$requestdata['DESIGNATION'] = $emailRequest->DESIGNATION??'-';
+				$requestdata['DEPARTMENT'] = $dept[0]->DEPT_NAME;
+				$requestdata['OFFICE PHONE'] = $emailRequest->OFFICE_PHONE??'-';
+				$requestdata['DATE OF APPOINTMENT'] = formatDate($emailRequest->DATE_OF_APPOINTMENT)??'-';
+				$requestdata['ADDITIONAL CHARGE'] = $emailRequest->ADDITIONAL_CHARGE??'-';
+				$requestdata['APPLICATION TRACKING ID'] = $id;
+			}
 
-		// Set paper size (A4) and orientation (portrait)
-		$dompdf->setPaper('A4', 'portrait');
+			$requestdata['APPLICANT PICTURE'] = $emailRequest->APPLICANT_PICTURE??'-';
+			$requestdata['APPLICATION TRACKING ID'] = $id;
+			$requestdata['APPLICATION ID'] = $emailRequest->REQUEST_ID;
 
-		// Render the PDF (first pass)
-		$dompdf->render();
+			$pdf = new PDF($emailRequest->ROLE, $requestdata);
 
-		// Output the generated PDF (streaming it to the browser)
-		$dompdf->stream("email_request_application.pdf", array("Attachment" => 0));  // 0 means display in the browser
+			$pdf->generatePDF();
+		}
+		else {
+			flashAlert('Failed', 'Some error occurred.', 'danger');
+			redirect('email_request');
+		}
 	}
 	public function verifyOTP() {
 		$input_otp = $this->input->post('otp_input');
@@ -833,12 +852,9 @@ class Home extends BaseController {
 			$this->session->unset_userdata('otp_expiry');
 
 			// Retrieve request data from the cookie
-			$emailRequestData = get_cookie('email_request_data');
-			if ($this->EmailRequest_model->create(json_decode($emailRequestData))) {
-				flashAlert('Done', 'Application submitted successfully', 'success');
-				$id = $this->db->insert_id();
-				$id = $this->encode_id($id);
-				redirect('email_pdf/'. $id, '=');
+			$emailRequestData = json_decode(get_cookie('email_request_data'), TRUE);
+			if ($this->EmailRequest_model->create($emailRequestData)) {
+				redirect('email_pdf/'. strtotime($emailRequestData['CREATED_AT']));
 				return 0;
 			}
 			else {
@@ -873,17 +889,19 @@ class Home extends BaseController {
 			return redirect('email_verify');
 		}
 		else {
-			flashAlert('Failed', 'Error processing application', 'danger');
-			return redirect('email_verify');
+			$this->session->unset_userdata('otp_code');
+			$this->session->unset_userdata('otp_expiry');
+			flashAlert('Failed', 'Error processing application. Please try again later.', 'danger');
+			return redirect('email_request');
 		}
 	}
 	private function uploadImage($file)
 	{
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'jpg|png|jpeg|webp|PNG|JPG';
-		$config['max_size'] = 500;
-		$config['max_width'] = 600;
-		$config['max_height'] = 1200;
+		$config['max_size'] = 600;
+//		$config['max_width'] = 600;
+//		$config['max_height'] = 1200;
 		$config['encrypt_name'] = TRUE;
 
 		$this->load->library('upload', $config);
@@ -924,22 +942,24 @@ class Home extends BaseController {
 			'DEPARTMENT_ID' => $this->input->post('department'),
 			'DATE_OF_BIRTH' => $this->input->post('date_of_birth'),
 			'RESEARCH_AREA' => strtoupper($this->input->post('research_area')),
-			'MOBILE_PHONE' => $this->input->post('mobile_phone'),
+			'MOBILE_NO' => $this->input->post('mobile_phone'),
 			'WHATSAPP_NO' => $this->input->post('whatsapp_no'),
 			'ADDRESS' => strtoupper($this->input->post('address')),
 			'CITY' => strtoupper($this->input->post('city')),
 			'PROVINCE' => strtoupper($this->input->post('province')),
-			'REQUEST_STATUS_ID' => 1
+			'REQUEST_STATUS_ID' => 1,
+			'CREATED_AT' => date("Y-m-d H:i:s"),
 		);
 
 		if($role == 1){
-			$data['STUDENT_ID'] = $this->input->post('roll_no');
+			$data['STUDENT_ID'] = strtoupper($this->input->post('roll_no'));
 			$data['DEGREE_PROGRAM'] = strtoupper($this->input->post('degree_program'));
 			$data['EDUCATION_LEVEL'] = strtoupper($this->input->post('education_level'));
 			$data['ADDITIONAL_QUALIFICATION'] = strtoupper($this->input->post('additional_qualification'));
 		}
-		else {
-			$data['STAFF_OR_FACULTY_ID'] = $this->input->post('staff_or_faculty_id');
+		else if($role == 2 || $role == 3) {
+			$data['STAFF_OR_FACULTY_ID'] = strtoupper($this->input->post('staff_or_faculty_id'));
+			$data['DESIGNATION'] = strtoupper($this->input->post('designation'));
 			$data['OFFICE_PHONE'] = $this->input->post('office_phone');
 			$data['DATE_OF_APPOINTMENT'] = $this->input->post('date_of_appointment');
 			$data['ADDITIONAL_CHARGE'] = strtoupper($this->input->post('additional_charge'));
@@ -950,23 +970,12 @@ class Home extends BaseController {
 			flashAlert('Failed', 'Email already exists', 'danger');
 			return redirect('email_request');
 		}
-		else {
-			$this->session->set_userdata('isVerified', FALSE);
-		}
 
 //		CNIC check
 		if($this->EmailRequest_model->ifExists('CNIC_NO', $this->input->post('cnic_no'))){
 			flashAlert('Failed', 'CNIC already exists', 'danger');
 			return redirect('email_request');
 		}
-//		Date of Birth check
-//		$currentDate = new DateTime();
-//		$dob = new DateTime($this->input->post('date_of_birth'));
-//		$age = $currentDate->diff($dob)->y;
-//		if($age < 18){
-//			flashAlert('Failed', 'Your age must be more than 18 years', 'danger');
-//			return redirect('email_request');
-//		}
 
 		$image = $_FILES['applicant_picture'];
 		$file = $this->uploadImage($image);
@@ -982,6 +991,7 @@ class Home extends BaseController {
 
 	public function email_request_status(){
 		echo "Status - Submitted";
+
 	}
 
 }

@@ -44,6 +44,12 @@ class EmailRequest_model extends CI_Model
 		return $query->row(); // Use row() for a single result
 	}
 
+	public function getByColumnValue($column, $value) {
+		$this->db->where($column, $value);
+		$query = $this->db->get($this->table);
+		return $query->row();
+	}
+
 	public function ifExists($col, $val) {
 		return $this->db->where($col, $val)
 				->count_all_results($this->table) > 0;

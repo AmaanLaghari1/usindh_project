@@ -1478,44 +1478,28 @@ if (!function_exists('flashAlert')) {
 	}
 }
 
-if (!function_exists('sendEmailApi')) {
-	function sendEmailApi($to, $subject, $email_body, $sender_id = 1, $reply_to = 'info@usindh.edu.pk') {
-		// API URL
-		$url = "https://itsc.usindh.edu.pk/sac/api/send_email_message";
-
-		// Data payload
-		$postData = array(
-			'to' => $to,
-			'subject' => $subject,
-			'sender_id' => $sender_id,
-			'reply_to' => $reply_to,
-			'email_body' => $email_body,
-		);
-
-		// cURL initialization
-		$ch = curl_init($url);
-
-		// Set options
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response as a string
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/x-www-form-urlencoded'
-		));
-
-		// Execute the request
-		$response = curl_exec($ch);
-
-		// Check for errors
-		if (curl_errno($ch)) {
-			return 'Error:' . curl_error($ch);
-		}
-
-		// Close cURL
-		curl_close($ch);
-
-		// Return response
-		return $response;
+if (!function_exists('formatDate')) {
+	function formatDate($value){
+		$date = new DateTime($value);
+		return $date->format('d-m-Y');
 	}
 }
 
+if (!function_exists('showDashIfEmpty')) {
+	function showDashIfEmpty($value){
+		return $value == '' || is_null($value) || $value == 0 ? '-' : $value;
+	}
+}
+
+
+if(!function_exists('encode_id')){
+	function encode_id($id) {
+		return strtr(base64_encode($id), '+/=', '-_,');
+	}
+}
+
+if(!function_exists(('decode_id'))){
+	function decode_id($encoded_id) {
+		return base64_decode(strtr($encoded_id, '-_,', '+/='));
+	}
+}

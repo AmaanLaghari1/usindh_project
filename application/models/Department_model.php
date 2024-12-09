@@ -32,8 +32,8 @@ class Department_model extends CI_Model
 		return $query->result();
 	}
 
-	public function getDepartmentById($emailRequestId) {
-		$this->db->where('DEPT_ID', $emailRequestId);
+	public function getDepartmentById($departmentId) {
+		$this->db->where('DEPT_ID', $departmentId);
 		$query = $this->db->get($this->table);
 		return $query->result();
 	}

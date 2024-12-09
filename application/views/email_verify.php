@@ -7,7 +7,7 @@
 
 			<div style="padding: 5rem" class="col-3 p-2">
 
-				<h3>Enter the otp code sent to your email <?= $_SESSION['otp_code']??0 ?></h3>
+				<h3>Enter the otp code sent to your email (check spam/junk folder)</h3>
 				<?php
 				if(isset($_SESSION['response'])){
 					?>

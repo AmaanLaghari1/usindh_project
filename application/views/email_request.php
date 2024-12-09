@@ -86,7 +86,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 
 					<div class="form-group my-2 other">
 						<label for="staff_or_faculty_id">Staff/Faculty ID<span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="roll_no" name="staff_or_faculty_id" placeholder="Enter your Roll No" value="<?= isset($old['staff_or_faculty_id']) ? $old['staff_or_faculty_id'] : '' ?>">
+						<input type="text" class="form-control" id="staff_or_faculty_id" name="staff_or_faculty_id" placeholder="Enter your Roll No" value="<?= isset($old['staff_or_faculty_id']) ? $old['staff_or_faculty_id'] : '' ?>">
 					</div>
 
 					<div class="form-group my-2">
@@ -124,7 +124,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 						<input type="text" class="form-control" id="education_level" name="education_level" placeholder="Enter your Education Level" value="<?= isset($old['education_level']) ? $old['education_level'] : '' ?>">
 					</div>
 
-					<div class="form-group my-2 other">
+					<div class="form-group my-2">
 						<label for="research_area">Research Focus Area</label>
 						<input type="text" class="form-control" id="research_area" name="research_area" placeholder="Enter your Research Area" value="<?= isset($old['research_area']) ? $old['research_area'] : '' ?>">
 					</div>
@@ -187,6 +187,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				province: { required: true },
 				applicant_picture: { required: true },
 				cnic_expiry: { required: true },
+				research_area: { required: true },
 			},
 			messages: {
 				email: {
@@ -216,7 +217,8 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				city: { required: "Please enter your City Name" },
 				province: { required: "Please enter your State or Province Name" },
 				applicant_picture: { required: "Please chose a photo" },
-				cnic_expiry: { required: "Please enter CNIC Expiry Date" }
+				cnic_expiry: { required: "Please enter CNIC Expiry Date" },
+				research_area: { required: "Please enter Research Focus Area" },
 			}
 		});
 
@@ -234,11 +236,15 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				// Set required rules for "Other" role-specific fields
 				$("#staff_or_faculty_id").rules("add", {
 					required: true,
-					messages: { required: "Please enter your ID" }
+					messages: { required: "Please enter your Employee ID" }
 				});
 				$("#date_of_appointment").rules("add", {
 					required: true,
 					messages: { required: "Please enter a Date of Appointment" }
+				});
+				$("#designation").rules("add", {
+					required: true,
+					messages: { required: "Please enter your Designation" }
 				});
 			} else { // If 'Student' role is selected
 				$(".std").show();
