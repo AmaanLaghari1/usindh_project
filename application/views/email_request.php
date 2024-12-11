@@ -57,11 +57,11 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					</div>
 
 					<div class="form-group my-2">
-						<label for="mobile_phone">Mobile Phone (11 digits only)<span class="text-danger">*</span></label>
+						<label for="mobile_phone">Mobile Phone <span class="text-danger">(11 digits only)*</span></label>
 						<input type="text" class="form-control" id="mobile_phone" name="mobile_phone" placeholder="Enter your Mobile Phone Number" value="<?= isset($old['mobile_phone']) ? $old['mobile_phone'] : '' ?>">
 					</div>
 					<div class="form-group my-2">
-						<label for="whatsapp_no">WhatsApp No. (11 digits only)<span class="text-danger">*</span></label>
+						<label for="whatsapp_no">WhatsApp No. <span class="text-danger">(11 digits only)*</span></label>
 						<input type="text" class="form-control" id="whatsapp_no" name="whatsapp_no" placeholder="Enter your Whatsapp Number" value="<?= isset($old['whatsapp_no']) ? $old['whatsapp_no'] : '' ?>">
 					</div>
 
@@ -218,7 +218,6 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				province: { required: "Please enter your State or Province Name" },
 				applicant_picture: { required: "Please chose a photo" },
 				cnic_expiry: { required: "Please enter CNIC Expiry Date" },
-				research_area: { required: "Please enter Research Focus Area" },
 			}
 		});
 
@@ -259,6 +258,13 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					required: true,
 					messages: { required: "Please select your Degree Program" }
 				});
+			}
+
+			if(role == 3){
+				$("#research_area").parent().hide()
+			}
+			else {
+				$("#research_area").parent().show()
 			}
 		}
 

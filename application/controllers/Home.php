@@ -854,6 +854,7 @@ class Home extends BaseController {
 			// Retrieve request data from the cookie
 			$emailRequestData = json_decode(get_cookie('email_request_data'), TRUE);
 			if ($this->EmailRequest_model->create($emailRequestData)) {
+				$this->session->set_userdata('otp_verified', TRUE);
 				redirect('email_pdf/'. strtotime($emailRequestData['CREATED_AT']));
 				return 0;
 			}
@@ -868,6 +869,13 @@ class Home extends BaseController {
 		}
 	}
 	public function emailRequestSendOTP(){
+		$otp_verified = $this->session->userdata('otp_verified');
+
+		if ($otp_verified) {
+			echo json_encode(array('status' => 'error', 'message' => 'OTP has already been verified'));
+			return 0;
+		}
+
 		$code = rand(1000, 9999);
 		$expiry = time() + 300;
 		$this->session->set_userdata('otp_code', $code);
@@ -884,9 +892,15 @@ class Home extends BaseController {
 		);
 
 		$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
-//
+
 		if($response['response_code'] == 200){
-			return redirect('email_verify');
+			if($this->input->is_ajax_request()){
+				echo json_encode(array('status' => 'success', 'redirect' => base_url('email_verify')));
+			}
+			else {
+				redirect('email_verify');
+			}
+			return 0;
 		}
 		else {
 			$this->session->unset_userdata('otp_code');
@@ -897,7 +911,7 @@ class Home extends BaseController {
 	}
 	private function uploadImage($file)
 	{
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = '../resource/upload_email_request_images/';
 		$config['allowed_types'] = 'jpg|png|jpeg|webp|PNG|JPG';
 		$config['max_size'] = 600;
 //		$config['max_width'] = 600;
@@ -941,7 +955,7 @@ class Home extends BaseController {
 			'LAST_NAME' => strtoupper($this->input->post('last_name')),
 			'DEPARTMENT_ID' => $this->input->post('department'),
 			'DATE_OF_BIRTH' => $this->input->post('date_of_birth'),
-			'RESEARCH_AREA' => strtoupper($this->input->post('research_area')),
+			'RESEARCH_AREA' => strtoupper($this->input->post('research_area'))??NULL,
 			'MOBILE_NO' => $this->input->post('mobile_phone'),
 			'WHATSAPP_NO' => $this->input->post('whatsapp_no'),
 			'ADDRESS' => strtoupper($this->input->post('address')),
@@ -986,6 +1000,7 @@ class Home extends BaseController {
 
 		set_cookie('email_request_data', json_encode($data), 3600);
 
+		$this->session->set_userdata('otp_verified', FALSE);
 		$this->emailRequestSendOTP();
 	}
 

@@ -11,6 +11,8 @@ class AdminLogin extends BaseController {
     public function __construct()
     {
         parent::__construct();
+//		echo cryptPassowrd("123456");
+//		exit();
     }
 
 

@@ -1487,7 +1487,7 @@ if (!function_exists('formatDate')) {
 
 if (!function_exists('showDashIfEmpty')) {
 	function showDashIfEmpty($value){
-		return $value == '' || is_null($value) || $value == 0 ? '-' : $value;
+		return $value == '' || is_null($value) ? '-' : $value;
 	}
 }
 

@@ -2,7 +2,7 @@
 class EmailRequest_model extends CI_Model
 {
 	protected $table = 'official_email_account_requests';
-	protected $primaryKey = 'EMAIL_REQUEST_ID';
+	protected $primaryKey = 'REQUEST_ID';
 
 	protected $allowedFields = array(
 		'STUDENT_ID',

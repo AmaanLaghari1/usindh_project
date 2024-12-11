@@ -2620,4 +2620,69 @@ class AdminPanel extends AdminAuthentication
 
     }
 
+	function view_all_email_request(){
+		$data['profile_url'] = $this->user['users_reg']['PROFILE_IMAGE'];
+		$data['user'] = $this->user['users_reg'];
+		$data['side_bar_values'] = $this->side_bar_values;
+		$data['email_requests'] = $this->EmailRequest_model->get();
+//		echo "<pre>";
+//		print_r($data['email_requests']);
+//		die();
+
+		$data['email_requests_obj']  =  "";
+		if(isset($_GET['id'])&&isValidData($_GET['id'])){
+			$id = isValidData($_GET['id']);
+			$data['faculty_obj'] = $this->Website_model->getFacultyByID($id,0);
+		}
+
+		$this->view('admin/view_all_email_request',$data);
+	}
+
+	public function officialEmailRequestHandler(){
+		$data['REQUEST_STATUS_ID'] = $this->input->post('request_status');
+		$data['REMARKS'] = $this->input->post('remarks');
+		$data['OFFICIAL_EMAIL_CREATED'] = $this->input->post('official_email');
+		$data['OFFICIAL_EMAIL_CREATED_AT'] = date('Y-m-d');
+		$applicationId = $this->input->post('request_id');
+
+		if($this->EmailRequest_model->ifExists('OFFICIAL_EMAIL_CREATED', $this->input->post('official_email'))){
+			flashAlert('Failed', 'Account already exists with this email', 'danger');
+			redirect(base_url()."AdminPanel/view_all_email_request");
+			return 0;
+		}
+
+		if($this->EmailRequest_model->update($applicationId, $data)){
+			flashAlert('Done', 'Status changed succefully', 'success');
+
+			$userData = $this->EmailRequest_model->getEmailRequestByID($applicationId);
+
+			if($userData && $data['REQUEST_STATUS_ID'] == 3){
+				$param = array(
+					'to' => $userData->EMAIL,
+					'subject' => 'University of Sindh - Email Request Application',
+					'email_body' => "Dear ". $userData->FIRST_NAME ." ". $userData->LAST_NAME .", Your official email account address is " . $userData->OFFICIAL_EMAIL_CREATED,
+					'sender_id' => 1,
+					'reply_to' => 'info@usindh.edu.pk',
+				);
+
+				$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
+
+				if($response['response_code'] == 200){
+					flashAlert('Done', 'Status changed successfully and email sent to the user', 'success');
+				}
+				else {
+					flashAlert('Done', 'Unable to send the email', 'danger');
+				}
+			}
+		}
+		else {
+			flashAlert('Failed', 'Unable to change the status', 'danger');
+		}
+
+		redirect(base_url()."AdminPanel/view_all_email_request");
+
+		return 0;
+	}
+
+
 }

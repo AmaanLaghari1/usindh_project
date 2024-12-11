@@ -22,8 +22,10 @@ class AdminAuthentication extends BaseController
             exit();
         } else {
 
-            $path = ltrim($_SERVER['REQUEST_URI'],'/');
-             $index = strpos($path,'?');
+            //$path = ltrim($_SERVER['REQUEST_URI'],'/');
+			$path = str_replace("/usindh/","",$_SERVER['REQUEST_URI']);
+
+			$index = strpos($path,'?');
               // var_dump($index);
                if($index!==false){
                    $path = explode('?', $path)[0];
@@ -61,8 +63,11 @@ class AdminAuthentication extends BaseController
 
     private function verify_path($path = null, $privilages)
     {
+		//prePrint($_SERVER['REQUEST_URI']);
+		//exit();
          if ($path == null) {
-                $path = ltrim($_SERVER['REQUEST_URI'],'/');
+            //    $path = ltrim($_SERVER['REQUEST_URI'],'/');
+                $path = str_replace("/usindh/","",$_SERVER['REQUEST_URI']);
                // $path = explode('index.php/', $self);
                $index = strpos($path,'?');
               // var_dump($index);

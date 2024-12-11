@@ -7,7 +7,7 @@
 
 			<div style="padding: 5rem" class="col-3 p-2">
 
-				<h3>Enter the otp code sent to your email (check spam/junk folder)</h3>
+				<h3 id="otp-heading">Enter the otp code sent to your email (check spam/junk folder)</h3>
 				<?php
 				if(isset($_SESSION['response'])){
 					?>
@@ -93,15 +93,29 @@ if (isset($_SESSION['otp_code']) && isset($_SESSION['otp_expiry'])) {
 			// Disable the resend button to prevent multiple clicks
 			$("#send-otp-btn").prop("disabled", true);
 
+			let formData = new FormData();
+			formData.append('resend', '1')
+
 			$.ajax({
 				url: 'resend_otp',
 				type: 'POST',
+				data: formData,
+				processData: false,
+				contentType: false,
 				success: function(response) {
-					// Reload the page to reset the OTP timer
-					location.reload();
+					const data = JSON.parse(response);
+					if (data.status === 'success') {
+						// Redirect to the provided URL
+						window.location.href = data.redirect;
+					} else {
+						// Show an error message
+						// alert(data.message);
+						$("#otp-heading").after(`<div class="alert alert-danger">${data.message}</div>`);
+						$("#send-otp-btn").prop("disabled", false);
+					}
 				},
 				error: function(xhr, status, error) {
-					// console.log("Error: " + error);
+					console.error("Error: " + error);
 					$("#send-otp-btn").prop("disabled", false);
 				}
 			});

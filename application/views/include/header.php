@@ -113,6 +113,8 @@ $project_name ="University of Sindh";
     
     <!--image rotate css yasir added custom-->
     <link rel="stylesheet" href="<?=base_url()?>assets/image_rotate.css">
+
+	<link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/datatables.min.css" rel="stylesheet">
     
     <script src="<?=base_url()?>assets/angular.min.js"></script>
     
