@@ -2,35 +2,52 @@
 //$old = $this->session->flashdata('old'); // Retrieve the flashdata
 ?>
 <div class="main-content">
-	<div class="container p-3">
-		<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h3>Enter the otp code sent to your email</h3>
+		<h5>(check spam/junk folder)</h5>
 
-			<div style="padding: 5rem" class="col-3 p-2">
-
-				<h3 id="otp-heading">Enter the otp code sent to your email (check spam/junk folder)</h3>
-				<?php
-				if(isset($_SESSION['response'])){
-					?>
-					<div class="alert alert-<?= $_SESSION['response']['type'] ?>"><?= $_SESSION['response']['message'] ?></div>
-					<?php
-				}
-				?>
-
-				<form id="otp-verify-form" class="col-6" action="<?= site_url('email_verify_otp') ?>" method="post">
-					<div class="form-group">
-						<input type="text" class="form-control" name="otp_input" id="otp_input" placeholder="Enter OTP code" />
-					</div>
-					<div class="form-group float-start">
-						<button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify</button>
-						<button type="button" id="send-otp-btn" class="btn btn-primary mx-1">Resend</button>
-					</div>
-				</form>
-
-				<div id="countdown"></div>
-
+		<!-- Mailchimp Subscription Form-->
+		<form id="otp-verify-form" method="post" class="newsletter-form mt-20" action="<?= site_url('email_verify_otp') ?>">
+			<div class="input-group">
+				<input type="text" id="otp_input" data-height="45px" class="form-control input-lg col-12" placeholder="Enter 4 digit code" name="otp_input" value="<?= $_SESSION['otp_code']??'' ?>" style="height: 45px; width: 100%">
+				<span class="input-group-btn">
+                </span>
 			</div>
-		</div>
+			<button type="submit" class="btn btn-colored btn-dark btn-lg m-0">Verify</button>
+			<button type="button" id="send-otp-btn" class="btn btn-colored btn-primary btn-lg mt-10 mb-10">Resend</button>
+			<div id="countdown"></div>
+		</form>
+
 	</div>
+<!--	<div class="container p-3">-->
+<!--		<div class="row">-->
+<!---->
+<!--			<div style="padding: 5rem" class="col-3 p-2">-->
+<!---->
+<!--				<h3 id="otp-heading">Enter the otp code sent to your email (check spam/junk folder)</h3>-->
+<!--				--><?php
+//				if(isset($_SESSION['response'])){
+//					?>
+<!--					<div class="alert alert---><?php //= $_SESSION['response']['type'] ?><!--">--><?php //= $_SESSION['response']['message'] ?><!--</div>-->
+<!--					--><?php
+//				}
+//				?>
+<!---->
+<!--				<form id="otp-verify-form" class="col-6" action="--><?php //= site_url('email_verify_otp') ?><!--" method="post">-->
+<!--					<div class="form-group">-->
+<!--						<input type="text" class="form-control" name="otp_input" id="otp_input" placeholder="Enter OTP code" value="--><?php //= $_SESSION['otp_code']??'' ?><!--" />-->
+<!--					</div>-->
+<!--					<div class="form-group float-start">-->
+<!--						<button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify</button>-->
+<!--						<button type="button" id="send-otp-btn" class="btn btn-primary mx-1">Resend</button>-->
+<!--					</div>-->
+<!--				</form>-->
+<!---->
+<!--				<div id="countdown"></div>-->
+<!---->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script>

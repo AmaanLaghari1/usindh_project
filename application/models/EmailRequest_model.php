@@ -14,22 +14,15 @@ class EmailRequest_model extends CI_Model
 		'DEPARTMENT_ID',
 		'DEGREE_PROGRAM',
 		'PROGRAM_TITLE',
-		'RESEARCH_AREA',
 		'DATE_OF_BIRTH',
 		'DATE_OF_APPOINTMENT',
 		'EDUCATION_LEVEL',
-		'ADDITIONAL_QUALIFICATION',
-		'ADDITIONAL_CHARGE',
-		'OFFICE_PHONE',
 		'MOBILE_PHONE',
 		'WHATSAPP_NO',
-		'ADDRESS',
 		'CITY',
-		'PROVINCE',
-		'POSTAL_CODE',
 		'APPLICANT_PICTURE',
 		'ROLE',
-		'DESIGNATION_ID',
+		'DESIGNATION',
 		'REQUEST_STATUS_ID'
 	);
 
@@ -97,11 +90,6 @@ class EmailRequest_model extends CI_Model
 				),
 			),
 			array(
-				'field' => 'cnic_expiry',
-				'label' => 'CNIC Expiry Date',
-				'rules' => 'required'
-			),
-			array(
 				'field' => 'email',
 				'label' => 'Email',
 				'rules' => array('required', 'email')
@@ -127,16 +115,6 @@ class EmailRequest_model extends CI_Model
 				'rules' => 'required'
 			),
 			array(
-				'field' => 'address',
-				'label' => 'Postal Address',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'province',
-				'label' => 'State/Province',
-				'rules' => 'required'
-			),
-			array(
 				'field' => 'city',
 				'label' => 'City',
 				'rules' => 'required'
@@ -157,11 +135,6 @@ class EmailRequest_model extends CI_Model
 			$config[] = array(
 				'field' => 'degree_program',
 				'label' => 'Degree Program',
-				'rules' => 'required'
-			);
-			$config[] = array(
-				'field' => 'education_level',
-				'label' => 'Education Level',
 				'rules' => 'required'
 			);
 		}

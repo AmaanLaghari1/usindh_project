@@ -5,11 +5,99 @@
         #home{
             height: 350px;
         }
+
+		/*Admission Card Styles*/
+		.admission-cards-container {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.admission-card {
+			height: 8rem;
+			background: #0a6aa1;
+			color: #fff;
+			display: flex;
+			align-items: center;
+			border-radius: 10px;
+		}
+
+		.admission-card h4 {
+			color: #fff;
+		}
+
+		.admission-card-img-container {
+			width: 20%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+	/*	Merit List Styles*/
+		.merit-list-category, .merit-list-option-container {
+			font-family: "Open Sans" sans-serif !important;
+		}
+
+		.merit-list-category {
+			/*background-color: #0967a9;*/
+			background-color: #f5f5f5;
+			padding: .5rem 1rem;
+			text-align: center;
+			border-radius: 10px;
+			margin: 10px 0;
+			transition: background-color 0.3s ease;
+		}
+
+		.merit-list-category:hover, .merit-list-category.active {
+			cursor: pointer;
+			background-color: #0967a9;
+		}
+
+		.merit-list-category:hover h4, .merit-list-category.active h4 {
+			color: #fff;
+		}
+
+		.merit-list-category h4 {
+			font-weight: 900;
+		}
+
+		.merit-list-option-container > div {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.merit-list-option-card {
+			position: relative;
+			padding: .5rem;
+			width: 100%;
+			max-width: 15rem;
+			text-align: center;
+			background-color: #fff;
+			color: #0967a9;
+			border-radius: 10px;
+			font-weight: 600;
+			margin: 10px;
+			box-shadow: #eee8e8 8px 8px 10px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.merit-list-option-card:hover {
+			background-color: #0967a9;
+			color: #fff;
+		}
+
+		.d-none {
+			display: none !important;
+		}
+
     </style>
-    <?php
+
+	<?php
     if(count($sliders)>0) {
         require('./application/views/includes/sliders.php');
     }
+
     ?>
     
 
@@ -57,7 +145,99 @@
     echo $content;
     ?>
    <?php
-  // require('./application/views/news_section.php');
+//   include('./application/views/merit_list.php');
    ?>
+
 </div>
- 
+
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md-3">
+			<div class="merit-list-category active">
+				<h4>Undergraduate</h4>
+			</div>
+			<div class="merit-list-category">
+				<h4>Masters</h4>
+			</div>
+		</div>
+		<div class="col-12 col-md-9" style="background-color: #F5F5F5; min-height: 10rem; border-radius: 10px;">
+			<div class="merit-list-option-container">
+				<div class="list-option">
+					<div class="merit-list-option-card">
+						<span>1st Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+
+					</div>
+					<div class="merit-list-option-card">
+						<span>2nd Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>3rd Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>4th Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>5th Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>6th Merit List</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+				</div>
+				<div class="shift-option d-none">
+					<div class="merit-list-option-card">
+						<span>Morning</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>Evening</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+				</div>
+				<div class="program-option d-none">
+					<div class="merit-list-option-card">
+						<span>ABC Program</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+					<div class="merit-list-option-card">
+						<span>XYZ Program</span>
+						<div style="top: 10%; right: 5%;" class="bi bi-arrow-right position-absolute fw-bolder fs-6"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script>
+
+
+		$(".merit-list-category").click(function(){
+			$(".merit-list-category").removeClass('active');
+
+			$(this).addClass('active')
+		})
+
+		$(".list-option .merit-list-option-card").click(function(){
+			$(this).parent().addClass('d-none')
+			$(".shift-option").removeClass('d-none')
+		})
+
+		$(".shift-option .merit-list-option-card").click(function(){
+			$(this).parent().addClass('d-none')
+			$(".program-option").removeClass('d-none')
+		})
+
+		$(".program-option .merit-list-option-card").click(function(){
+			// $(this).parent().addClass('d-none')
+		})
+
+
+
+	</script>
+</div>
+

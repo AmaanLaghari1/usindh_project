@@ -1,4 +1,8 @@
 
+                                                            
+<!---END-SECTION--->
+                                                            
+<!---END-SECTION--->
                                                                 
                                 <section id="about" class="">
       <div class="container">
@@ -848,4 +852,3 @@ The university is known for producing high quality graduates and for its service
   </div>
 </div>
 </div></section>                                                                                                                
-                            

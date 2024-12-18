@@ -114,7 +114,12 @@ $project_name ="University of Sindh";
     <!--image rotate css yasir added custom-->
     <link rel="stylesheet" href="<?=base_url()?>assets/image_rotate.css">
 
+	<!-- jQuey Datatable CDN	-->
 	<link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/datatables.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+	<!-- Sweetalert2 CDN	-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css">
     
     <script src="<?=base_url()?>assets/angular.min.js"></script>
     

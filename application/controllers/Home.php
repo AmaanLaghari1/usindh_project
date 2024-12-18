@@ -743,6 +743,11 @@ class Home extends BaseController {
 	}
 
 	public function email_verify(){
+
+		if($_SESSION['otp_verified']){
+			redirect('email_request');
+			return;
+		}
 		$website_url="usindh";
 		$website_obj =  $this->Website_model->getWebsiteByUrl($website_url);
 		$faculty =  $this->Website_model->getFaculty(0,1);
@@ -772,7 +777,11 @@ class Home extends BaseController {
 	public function generateFPDF($id){
 		$this->load->library('pdf.php');
 
+		$this->load->helper('cookie');
+
 		$data = json_decode(get_cookie('email_request_data'), TRUE);
+
+		delete_cookie('email_request_data');
 
 		$dept = $this->Department_model->getDepartmentById($data['DEPARTMENT_ID']);
 
@@ -785,30 +794,23 @@ class Home extends BaseController {
 				'EMAIL ADDRESS' => $emailRequest->EMAIL??'-',
 				'DATE OF BIRTH' => formatDate($emailRequest->DATE_OF_BIRTH)??'-',
 				'CNIC NO.' => $emailRequest->CNIC_NO??'-',
-				'CNIC EXPIRY DATE' => formatDate($emailRequest->CNIC_EXPIRY)??'-',
 				'MOBILE NO.' => $emailRequest->MOBILE_NO??'-',
 				'WHATSAPP NO.' => $emailRequest->WHATSAPP_NO??'-',
-				'POSTAL ADDRESS' => $emailRequest->ADDRESS??'-',
-				'STATE/PROVINCE' => $emailRequest->PROVINCE??'-',
 				'CITY' => $emailRequest->CITY??'-',
 			);
 
 			if($data['ROLE'] == 1){
 				$requestdata['ROLL NO./ STUDENT ID'] = $emailRequest->STUDENT_ID??'-';
 				$requestdata['DEGREE PROGRAM'] = $emailRequest->DEGREE_PROGRAM??'-';
+				$requestdata['BATCH'] = $emailRequest->BATCH??'-';
 				$requestdata['DEPARTMENT'] = $dept[0]->DEPT_NAME;
 				$requestdata['EDUCATION LEVEL'] = $emailRequest->EDUCATION_LEVEL??'-';
-				$requestdata['RESEARCH AREA'] = $emailRequest->RESEARCH_AREA??'-';
-				$requestdata['ADDITIONAL QUALIFICATION'] = $emailRequest->ADDITIONAL_QUALIFICATION??'-';
 			}
 			else if($data['ROLE'] == 2 || $data['ROLE'] == 3) {
 				$requestdata['EMPLOYEE ID'] = $emailRequest->STAFF_OR_FACULTY_ID??'-';
 				$requestdata['DESIGNATION'] = $emailRequest->DESIGNATION??'-';
 				$requestdata['DEPARTMENT'] = $dept[0]->DEPT_NAME;
-				$requestdata['OFFICE PHONE'] = $emailRequest->OFFICE_PHONE??'-';
 				$requestdata['DATE OF APPOINTMENT'] = formatDate($emailRequest->DATE_OF_APPOINTMENT)??'-';
-				$requestdata['ADDITIONAL CHARGE'] = $emailRequest->ADDITIONAL_CHARGE??'-';
-				$requestdata['APPLICATION TRACKING ID'] = $id;
 			}
 
 			$requestdata['APPLICANT PICTURE'] = $emailRequest->APPLICANT_PICTURE??'-';
@@ -950,33 +952,27 @@ class Home extends BaseController {
 			'ROLE' => $role,
 			'EMAIL' => $this->input->post('email'),
 			'CNIC_NO' => $this->input->post('cnic_no'),
-			'CNIC_EXPIRY' => $this->input->post('cnic_expiry'),
 			'FIRST_NAME' => strtoupper($this->input->post('first_name')),
 			'LAST_NAME' => strtoupper($this->input->post('last_name')),
 			'DEPARTMENT_ID' => $this->input->post('department'),
 			'DATE_OF_BIRTH' => $this->input->post('date_of_birth'),
-			'RESEARCH_AREA' => strtoupper($this->input->post('research_area'))??NULL,
 			'MOBILE_NO' => $this->input->post('mobile_phone'),
 			'WHATSAPP_NO' => $this->input->post('whatsapp_no'),
-			'ADDRESS' => strtoupper($this->input->post('address')),
 			'CITY' => strtoupper($this->input->post('city')),
-			'PROVINCE' => strtoupper($this->input->post('province')),
 			'REQUEST_STATUS_ID' => 1,
 			'CREATED_AT' => date("Y-m-d H:i:s"),
 		);
 
 		if($role == 1){
 			$data['STUDENT_ID'] = strtoupper($this->input->post('roll_no'));
+			$data['BATCH'] = strtoupper($this->input->post('batch'));
 			$data['DEGREE_PROGRAM'] = strtoupper($this->input->post('degree_program'));
 			$data['EDUCATION_LEVEL'] = strtoupper($this->input->post('education_level'));
-			$data['ADDITIONAL_QUALIFICATION'] = strtoupper($this->input->post('additional_qualification'));
 		}
 		else if($role == 2 || $role == 3) {
 			$data['STAFF_OR_FACULTY_ID'] = strtoupper($this->input->post('staff_or_faculty_id'));
 			$data['DESIGNATION'] = strtoupper($this->input->post('designation'));
-			$data['OFFICE_PHONE'] = $this->input->post('office_phone');
 			$data['DATE_OF_APPOINTMENT'] = $this->input->post('date_of_appointment');
-			$data['ADDITIONAL_CHARGE'] = strtoupper($this->input->post('additional_charge'));
 		}
 
 //		Email check
@@ -1002,11 +998,6 @@ class Home extends BaseController {
 
 		$this->session->set_userdata('otp_verified', FALSE);
 		$this->emailRequestSendOTP();
-	}
-
-	public function email_request_status(){
-		echo "Status - Submitted";
-
 	}
 
 }

@@ -2645,7 +2645,7 @@ class AdminPanel extends AdminAuthentication
 		$data['OFFICIAL_EMAIL_CREATED_AT'] = date('Y-m-d');
 		$applicationId = $this->input->post('request_id');
 
-		if($this->EmailRequest_model->ifExists('OFFICIAL_EMAIL_CREATED', $this->input->post('official_email'))){
+		if($data['REQUEST_STATUS_ID'] == 3 && $this->EmailRequest_model->ifExists('OFFICIAL_EMAIL_CREATED', $this->input->post('official_email'))){
 			flashAlert('Failed', 'Account already exists with this email', 'danger');
 			redirect(base_url()."AdminPanel/view_all_email_request");
 			return 0;
@@ -2668,15 +2668,15 @@ class AdminPanel extends AdminAuthentication
 				$response = postCURL('https://itsc.usindh.edu.pk/sac/api/send_email_message', $param);
 
 				if($response['response_code'] == 200){
-					flashAlert('Done', 'Status changed successfully and email sent to the user', 'success');
+					flashAlert('Account Created', 'Status changed successfully and email sent to the user', 'success');
 				}
 				else {
-					flashAlert('Done', 'Unable to send the email', 'danger');
+					flashAlert('Account Created', 'Unable to send the email', 'error');
 				}
 			}
 		}
 		else {
-			flashAlert('Failed', 'Unable to change the status', 'danger');
+			flashAlert('Failed', 'Unable to change the status', 'error');
 		}
 
 		redirect(base_url()."AdminPanel/view_all_email_request");
