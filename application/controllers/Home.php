@@ -807,7 +807,7 @@ class Home extends BaseController {
 				$requestdata['EDUCATION LEVEL'] = $emailRequest->EDUCATION_LEVEL??'-';
 			}
 			else if($data['ROLE'] == 2 || $data['ROLE'] == 3) {
-				$requestdata['EMPLOYEE ID'] = $emailRequest->STAFF_OR_FACULTY_ID??'-';
+				$requestdata['EMPLOYEE ID'] = $emailRequest->EMPLOYEE_ID??'-';
 				$requestdata['DESIGNATION'] = $emailRequest->DESIGNATION??'-';
 				$requestdata['DEPARTMENT'] = $dept[0]->DEPT_NAME;
 				$requestdata['DATE OF APPOINTMENT'] = formatDate($emailRequest->DATE_OF_APPOINTMENT)??'-';
@@ -970,7 +970,7 @@ class Home extends BaseController {
 			$data['EDUCATION_LEVEL'] = strtoupper($this->input->post('education_level'));
 		}
 		else if($role == 2 || $role == 3) {
-			$data['STAFF_OR_FACULTY_ID'] = strtoupper($this->input->post('staff_or_faculty_id'));
+			$data['EMPLOYEE_ID'] = strtoupper($this->input->post('employee_id'));
 			$data['DESIGNATION'] = strtoupper($this->input->post('designation'));
 			$data['DATE_OF_APPOINTMENT'] = $this->input->post('date_of_appointment');
 		}

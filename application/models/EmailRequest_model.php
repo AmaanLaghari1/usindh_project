@@ -6,14 +6,14 @@ class EmailRequest_model extends CI_Model
 
 	protected $allowedFields = array(
 		'STUDENT_ID',
-		'STAFF_OR_FACULTY_ID',
+		'EMPLOYEE_ID',
 		'CNIC_NO',
 		'EMAIL',
 		'FIRST_NAME',
 		'LAST_NAME',
 		'DEPARTMENT_ID',
 		'DEGREE_PROGRAM',
-		'PROGRAM_TITLE',
+		'BATCH',
 		'DATE_OF_BIRTH',
 		'DATE_OF_APPOINTMENT',
 		'EDUCATION_LEVEL',
@@ -140,8 +140,8 @@ class EmailRequest_model extends CI_Model
 		}
 		else {
 			$config[] = array(
-				'field' => 'staff_or_faculty_id',
-				'label' => 'Staff/Faculty ID',
+				'field' => 'employee_id',
+				'label' => 'Employee ID',
 				'rules' => 'required'
 			);
 			$config[] = array(

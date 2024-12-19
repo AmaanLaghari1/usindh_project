@@ -107,8 +107,8 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group other">
-										<label for="staff_or_faculty_id">Employee ID<span class="text-danger">*</span></label>
-										<input type="text" class="form-control" id="staff_or_faculty_id" name="staff_or_faculty_id" placeholder="Enter your Employee ID" value="<?= isset($old['staff_or_faculty_id']) ? $old['staff_or_faculty_id'] : '' ?>">
+										<label for="employee_id">Employee ID<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="Enter your Employee ID" value="<?= isset($old['employee_id']) ? $old['employee_id'] : '' ?>">
 									</div>
 								</div>
 							</div>
@@ -244,7 +244,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 				$(".std").hide();
 
 				// Set required rules for "Other" role-specific fields
-				$("#staff_or_faculty_id").rules("add", {
+				$("#employee_id").rules("add", {
 					required: true,
 					messages: { required: "Please enter your Employee ID" }
 				});

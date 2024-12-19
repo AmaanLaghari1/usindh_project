@@ -2684,5 +2684,19 @@ class AdminPanel extends AdminAuthentication
 		return 0;
 	}
 
+	public function deleteOfficialEmail (){
+		$data['OFFICIAL_EMAIL_CREATED'] = NULL;
+		$data['REQUEST_STATUS_ID'] = 2;
+		$data['OFFICIAL_EMAIL_CREATED_AT'] = date('Y-m-d');
+		$applicationId = $this->input->post('application_id');
+
+		if($this->EmailRequest_model->update($applicationId, $data)) {
+			flashAlert('Email Deleted', 'Official Email deleted successfully', 'success');
+		}
+		else {
+			flashAlert('Failed', 'Unable to delete the Email', 'error');
+		}
+		redirect(base_url() . 'AdminPanel/view_all_email_request');
+	}
 
 }

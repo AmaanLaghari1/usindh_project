@@ -74,6 +74,13 @@
 												<div class="form-group official_email_field" style="display: none;">
 													<label for="official_email">OFFICIAL EMAIL</label>
 													<input type="email" class="form-control" id="official_email" name="official_email" placeholder="Enter Official Email Address" value="<?= $email_request->OFFICIAL_EMAIL_CREATED??'' ?>" />
+													<?php
+													if($email_request->OFFICIAL_EMAIL_CREATED != ''){
+													?>
+														<a type="button" data-toggle="modal" data-target="#delete-email-modal<?= $email_request->REQUEST_ID ?>" class="btn btn-sm btn-danger mt-5">Delete Email</a>
+													<?php
+													}
+													?>
 												</div>
 												<div class="form-group">
 													<label for="remarks">REMARKS</label>
@@ -86,6 +93,25 @@
 												<button class="btn btn-success" type="submit">Save</button>
 											</div>
 										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--		DELETE OFFICIAL EMAIL MODAL			-->
+					<div class="modal fade" id="delete-email-modal<?= $email_request->REQUEST_ID ?>">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									Are you sure to delete this email?
+								</div>
+								<div class="modal-body">
+									<form method="post" action="<?= base_url() . 'AdminPanel/deleteOfficialEmail' ?>">
+										<input type="hidden" name="application_id" value="<?= $email_request->REQUEST_ID??'' ?>" />
+										<div class="small"><i><b>Note:</b> this will also change the status of application to Received.</i></div>
+										<button type="submit" class="btn btn-sm btn-success">Yes</button>
+										<button type="button" class="btn btn-sm btn-danger mx-1" data-dismiss="modal">Cancel</button>
 									</form>
 								</div>
 							</div>
