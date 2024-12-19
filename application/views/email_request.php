@@ -2,7 +2,6 @@
 $old = $this->session->flashdata('old'); // Retrieve the flashdata
 ?>
 <div class="main-content">
-	<!-- Section: Job Apply Form -->
 	<section class="divider">
 		<div class="container">
 			<div class="row">
@@ -10,6 +9,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 					<div class="border-1px p-30 mb-0">
 						<h3 class="text-theme-colored mt-0 pt-5">Official Email Request Application</h3>
 						<hr>
+						<p>Choose your role before submitting the form</p>
 						<?php
 						if(isset($_SESSION['response'])){
 						?>
@@ -49,6 +49,7 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="cnic_no">CNIC No. <small class="text-danger">*</small></label>
+										<small class="text-danger">(13 digits without dashes)</small>
 										<input name="cnic_no" id="cnic_no" type="text" placeholder="Enter CNIC NO." required="" class="form-control" value="<?= isset($old['cnic_no']) ? $old['cnic_no'] : '' ?>">
 									</div>
 								</div>
@@ -65,23 +66,8 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 										<label for="date_of_birth">Date of Birth<span class="text-danger">*</span></label>
 										<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Enter your Date of Birth" value="<?= isset($old['date_of_birth']) ? $old['date_of_birth'] : '' ?>">
 									</div>
-<!--									<div class="form-group">-->
-<!--										<label>Sex <small>*</small></label>-->
-<!--										<select name="form_sex" class="form-control required">-->
-<!--											<option value="Male">Male</option>-->
-<!--											<option value="Female">Female</option>-->
-<!--										</select>-->
-<!--									</div>-->
 								</div>
 								<div class="col-sm-6">
-<!--									<div class="form-group">-->
-<!--										<label>Job Post <small>*</small></label>-->
-<!--										<select name="form_post" class="form-control required">-->
-<!--											<option value="Finance Manager">Finance Manager</option>-->
-<!--											<option value="Area Manager">Area Manager</option>-->
-<!--											<option value="Country Manager">Country Manager</option>-->
-<!--										</select>-->
-<!--									</div>-->
 									<div class="form-group">
 										<label for="city">City<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" id="city" name="city" placeholder="Enter your City Name" value="<?= isset($old['city']) ? $old['city'] : '' ?>">
@@ -91,13 +77,15 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="mobile_phone">Mobile Phone <span class="text-danger">(11 digits only)*</span></label>
+										<label for="mobile_phone">Mobile Phone <span class="text-danger">*</span></label>
+										<small class="text-danger">(11 digits only)</small>
 										<input type="text" class="form-control" id="mobile_phone" name="mobile_phone" placeholder="Enter your Mobile Phone Number" value="<?= isset($old['mobile_phone']) ? $old['mobile_phone'] : '' ?>">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group my-2">
-										<label for="whatsapp_no">WhatsApp No. <span class="text-danger">(11 digits only)*</span></label>
+										<label for="whatsapp_no">WhatsApp No. <span class="text-danger">*</span></label>
+										<small class="text-danger">(11 digits only)</small>
 										<input type="text" class="form-control" id="whatsapp_no" name="whatsapp_no" placeholder="Enter your Whatsapp Number" value="<?= isset($old['whatsapp_no']) ? $old['whatsapp_no'] : '' ?>">
 									</div>
 								</div>
@@ -170,16 +158,17 @@ $old = $this->session->flashdata('old'); // Retrieve the flashdata
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group other">
-										<label for="date_of_appointment">Date of Appointment</label>
+										<label for="date_of_appointment">Date of Appointment<small class="text-danger">*</small></label>
 										<input type="date" class="form-control" id="date_of_appointment" name="date_of_appointment" placeholder="Enter your Date of Appointment" value="<?= isset($old['date_of_appointment']) ? $old['date_of_appointment'] : '' ?>">
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="applicant_picture">Applicant Picture (white background, 2x2 dimensions, 500KB max)
+								<label for="applicant_picture">Applicant Picture
 									<span class="text-danger">*</span>
 								</label>
-								<input type="file" class="form-control" id="applicant_picture" name="applicant_picture" accept="image/*">
+									<small class="text-danger">(Max Upload File Size: 500KB, Background: White, Dimensions: 2x2)</small>
+								<input type="file" class="" id="applicant_picture" name="applicant_picture" accept="image/*">
 								<img id="applicant_picture_preview" src="" alt="Preview" style="display: none; margin-top: 10px; max-width: 100px; border: 1px solid #ccc;">
 							</div>
 							<div class="form-group">

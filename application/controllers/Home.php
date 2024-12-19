@@ -781,7 +781,7 @@ class Home extends BaseController {
 
 		$data = json_decode(get_cookie('email_request_data'), TRUE);
 
-		delete_cookie('email_request_data');
+		delete_cookie('email_request_data', '', '/');
 
 		$dept = $this->Department_model->getDepartmentById($data['DEPARTMENT_ID']);
 

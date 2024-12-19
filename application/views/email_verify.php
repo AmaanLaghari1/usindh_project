@@ -5,7 +5,15 @@
 	<div class="col-md-6 col-md-offset-3">
 		<h3>Enter the otp code sent to your email</h3>
 		<h5>(check spam/junk folder)</h5>
-
+		<?php
+		if(isset($_SESSION['response'])){
+			?>
+			<div class="alert alert-<?= $_SESSION['response']['type'] ?>">
+				<?= $_SESSION['response']['message'] ?>
+			</div>
+			<?php
+		}
+		?>
 		<!-- Mailchimp Subscription Form-->
 		<form id="otp-verify-form" method="post" class="newsletter-form mt-20" action="<?= site_url('email_verify_otp') ?>">
 			<div class="input-group">
@@ -19,35 +27,6 @@
 		</form>
 
 	</div>
-<!--	<div class="container p-3">-->
-<!--		<div class="row">-->
-<!---->
-<!--			<div style="padding: 5rem" class="col-3 p-2">-->
-<!---->
-<!--				<h3 id="otp-heading">Enter the otp code sent to your email (check spam/junk folder)</h3>-->
-<!--				--><?php
-//				if(isset($_SESSION['response'])){
-//					?>
-<!--					<div class="alert alert---><?php //= $_SESSION['response']['type'] ?><!--">--><?php //= $_SESSION['response']['message'] ?><!--</div>-->
-<!--					--><?php
-//				}
-//				?>
-<!---->
-<!--				<form id="otp-verify-form" class="col-6" action="--><?php //= site_url('email_verify_otp') ?><!--" method="post">-->
-<!--					<div class="form-group">-->
-<!--						<input type="text" class="form-control" name="otp_input" id="otp_input" placeholder="Enter OTP code" value="--><?php //= $_SESSION['otp_code']??'' ?><!--" />-->
-<!--					</div>-->
-<!--					<div class="form-group float-start">-->
-<!--						<button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify</button>-->
-<!--						<button type="button" id="send-otp-btn" class="btn btn-primary mx-1">Resend</button>-->
-<!--					</div>-->
-<!--				</form>-->
-<!---->
-<!--				<div id="countdown"></div>-->
-<!---->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script>
